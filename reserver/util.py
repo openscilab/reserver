@@ -5,6 +5,7 @@ from platform import system
 from hashlib import sha256
 from time import time
 
+
 def is_platform_linux():
     """
     Check whether current platform is linux or not.
@@ -12,6 +13,7 @@ def is_platform_linux():
     :return: bool
     """
     return system() == "Linux"
+
 
 def get_random_name():
     """

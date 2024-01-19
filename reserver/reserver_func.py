@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Functions."""
-from requests import get 
+from requests import get
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
+
 
 def does_package_exist(suggested_name, test_pypi):
     """
@@ -21,6 +22,7 @@ def does_package_exist(suggested_name, test_pypi):
         url = PYPI_MAIN_URL + "/" + suggested_name + "/"
     response = get(url)
     return not response.status_code == 404
+
 
 def generate_template_setup_py(package_name):
     """
@@ -68,5 +70,5 @@ setup(
 )
 
     """
-    with open(package_name + "_setup.py","w+") as f:
+    with open(package_name + "_setup.py", "w+") as f:
         f.writelines(setup_py_content)

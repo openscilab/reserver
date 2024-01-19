@@ -3,13 +3,16 @@
 
 # -*- coding: utf-8 -*-
 """PyMilo modules."""
+
+
+
+
 from .reserver_func import does_package_exist, generate_template_setup_py
 from .util import is_platform_linux
 from os import environ, path, getcwd, remove
 from shutil import rmtree
 from sys import executable
 from subprocess import check_output, CalledProcessError
-
 class Uploader:
     """
     The Reserver Uploader class reserves a package name by uploading a template repo to pypi account.
@@ -18,7 +21,7 @@ class Uploader:
     >>> uploader.upload_to_pypi(PACKAGE_NAME) # uploads package to the given test pypi account.
     """
 
-    def __init__(self, api_token, is_test_pypi_account = False ):
+    def __init__(self, api_token, is_test_pypi_account=False):
         """
         Initialize the Reserver Uploader instance.
 
@@ -39,12 +42,12 @@ class Uploader:
         :param package_name: package name
         :type package_name: str
         :param to_test_pypi: boolean flag to indicate uploading to pypi test or not
-        :type to_test_pypi: bool      
+        :type to_test_pypi: bool
         :return: None
         """
         if does_package_exist(package_name, self.test_pypi):
             print("This package already exists in PyPI.")
-            return 
+            return
         generate_template_setup_py(package_name)
 
         environ["TWINE_USERNAME"] = self.username
@@ -67,21 +70,22 @@ class Uploader:
             executable + " " + generated_setup_file_path + " sdist bdist_wheel "]
         if is_platform_linux():
             # handle the place build files get generated.
-            # pip install "importlib-metadata<5.0" for https://bobbyhadz.com/blog/entrypoints-object-has-no-attribute-get
+            # pip install "importlib-metadata<5.0" for
+            # https://bobbyhadz.com/blog/entrypoints-object-has-no-attribute-get
             commands.append(executable + " -m pip install \"importlib-metadata<5.0\"")
         if self.test_pypi:
             commands += [
                 executable + " -m twine upload --repository testpypi " + generated_tar_gz_file,
                 executable + " -m twine upload --repository testpypi " + generated_wheel_file,
-                ]
+            ]
         else:
             commands += [
                 executable + " -m twine upload --verbose " + generated_tar_gz_file,
                 executable + " -m twine upload --verbose " + generated_wheel_file,
-                ]
+            ]
         # Run the commands
         publish_failed = False
-        error = None 
+        error = None
         for command in commands:
             print("running this command: ", command)
             try:
