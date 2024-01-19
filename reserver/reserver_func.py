@@ -5,7 +5,7 @@ from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
 
 def does_package_exist(suggested_name, test_pypi):
     """
-    Checks whether a package with the given name exists or not.
+    Check whether a package with the given name exists or not.
 
     :param suggested_name: given name to search in pypi(or test.pypi)
     :type suggested_name: str
@@ -24,7 +24,7 @@ def does_package_exist(suggested_name, test_pypi):
 
 def generate_template_setup_py(package_name):
     """
-    Generates a template `setup.py` file for given package name.
+    Generate a template `setup.py` file for given package name.
 
     :param package_name: given name to generate template `setup.py` for it.
     :type package_name: str
