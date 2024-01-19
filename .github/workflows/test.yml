@@ -42,7 +42,7 @@ jobs:
         with:
             fail_ci_if_error: false
         if: matrix.python-version == env.TEST_PYTHON_VERSION && matrix.os == env.TEST_OS
-      - name: Other tests
+      - name: vulture, bandit and pydocstyle tests
         run: |
           python -m vulture reserver/ otherfiles/ setup.py --min-confidence 65 --exclude=__init__.py --sort-by-size
           python -m bandit -r reserver -s B311
