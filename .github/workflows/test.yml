@@ -32,6 +32,9 @@ jobs:
           python otherfiles/requirements-splitter.py
           pip install --upgrade --upgrade-strategy=only-if-needed -r test-requirements.txt
       - name: Test with pytest 
+        env:
+          TWINE_TEST_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
+          TWINE_TEST_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
         run: |
           python -m pytest . --cov=reserver --cov-report=term
       - name: Upload coverage to Codecov
