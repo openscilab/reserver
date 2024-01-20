@@ -37,7 +37,7 @@ class Uploader:
 
     def upload_to_pypi(self, package_name):
         """
-        Upload a template package to pypi or test_pypi
+        Upload a template package to pypi or test_pypi.
 
         :param package_name: package name
         :type package_name: str
