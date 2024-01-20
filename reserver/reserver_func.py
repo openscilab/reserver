@@ -20,7 +20,7 @@ def does_package_exist(suggested_name, test_pypi):
         url = PYPI_TEST_URL + "/" + suggested_name + "/"
     else:
         url = PYPI_MAIN_URL + "/" + suggested_name + "/"
-    response = get(url)
+    response = get(url, timeout=5)
     return not response.status_code == 404
 
 
