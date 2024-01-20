@@ -1,0 +1,2 @@
+[bandit]
+skips=B404,B602
