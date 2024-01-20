@@ -99,8 +99,4 @@ ENV/
 out
 gen
 
-/tests/exported_linear_models 
-/tests/exported_neural_networks
-/tests/exported_decision_trees
-/tests/exported_clusterings
 /.VSCodeCounter
