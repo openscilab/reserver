@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
-
-# -*- coding: utf-8 -*-
-"""PyMilo modules."""
-
-
-
-
 from .reserver_func import does_package_exist, generate_template_setup_py
 from .util import is_platform_linux
 from os import environ, path, getcwd, remove
 from shutil import rmtree
 from sys import executable
 from subprocess import check_output, CalledProcessError
+
+
 class Uploader:
     """
     The Reserver Uploader class reserves a package name by uploading a template repo to pypi account.
