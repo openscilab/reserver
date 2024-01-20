@@ -89,6 +89,10 @@ class Uploader:
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
+                if command == commands[-2]:
+                    if "403" in error and "Invalid or non-existent authentication information" in error:
+                        error = "Invalid or non-existent authentication information(PyPI API Key)."
+                break 
 
         remove(generated_setup_file_path)
         rmtree(generated_egginfo_file_path)
