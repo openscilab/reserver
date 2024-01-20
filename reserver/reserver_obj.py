@@ -42,7 +42,8 @@ class Uploader:
         """
         if does_package_exist(package_name, self.test_pypi):
             print("This package already exists in PyPI.")
-            return
+            return False 
+        
         generate_template_setup_py(package_name)
 
         environ["TWINE_USERNAME"] = self.username
@@ -89,11 +90,14 @@ class Uploader:
                 publish_failed = True
                 error = e.output
 
-        if publish_failed:
-            print(f"Publish to PyPI failed because of: ", error)
-        else:
-            print("Congratulations! You have successfully reserved the PyPI package: ", package_name)
         remove(generated_setup_file_path)
         rmtree(generated_egginfo_file_path)
         rmtree(generated_built_folder)
         rmtree(generated_dist_folder)
+
+        if publish_failed:
+            print(f"Publish to PyPI failed because of: ", error)
+            return False  
+        else:
+            print("Congratulations! You have successfully reserved the PyPI package: ", package_name)
+            return True 
