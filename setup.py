@@ -23,7 +23,7 @@ def read_description():
             description += c.read()
         return description
     except Exception:
-        return '''Transportation of ML models'''
+        return '''PyPI Package Name Reserver'''
 
 
 setup(
