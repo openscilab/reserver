@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Functions."""
+"""Reserver Functions."""
 from requests import get
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
 
