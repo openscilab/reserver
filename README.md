@@ -41,8 +41,8 @@ Reserver is an open source Python package that provides functionality to easily 
     <tr>
         <td align="center">PyPI Counter</td>
         <td align="center">
-            <a href="TODO">
-                <img src="TODO">
+            <a href="http://pepy.tech/project/reserver">
+                <img src="http://pepy.tech/badge/reserver">
             </a>
         </td>
     </tr>
