@@ -60,11 +60,11 @@ class Uploader:
             rmtree(generated_dist_folder)
 
         commands = [executable + " " + generated_setup_file_path + " sdist bdist_wheel "]
-        if is_platform_linux():
+        # if is_platform_linux():
             # handle the place build files get generated.
             # pip install "importlib-metadata<5.0" for
             # https://bobbyhadz.com/blog/entrypoints-object-has-no-attribute-get
-            commands.append(executable + " -m pip install \"importlib-metadata<5.0\"")
+            # commands.append(executable + " -m pip install \"importlib-metadata<5.0\"")
         if self.test_pypi:
             commands += [
                 executable + " -m twine upload --repository testpypi " + generated_tar_gz_file,
