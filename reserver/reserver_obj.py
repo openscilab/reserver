@@ -59,11 +59,7 @@ class Uploader:
         if path.exists(generated_dist_folder):
             rmtree(generated_dist_folder)
 
-        commands = [
-            executable + " -m pip install --upgrade pip",
-            executable + " -m pip install setuptools wheel twine",
-            executable + " -m pip install --upgrade setuptools",
-            executable + " " + generated_setup_file_path + " sdist bdist_wheel "]
+        commands = [executable + " " + generated_setup_file_path + " sdist bdist_wheel "]
         if is_platform_linux():
             # handle the place build files get generated.
             # pip install "importlib-metadata<5.0" for
