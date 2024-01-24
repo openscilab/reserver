@@ -35,8 +35,6 @@ class Uploader:
 
         :param package_name: package name
         :type package_name: str
-        :param to_test_pypi: boolean flag to indicate uploading to pypi test or not
-        :type to_test_pypi: bool
         :return: None
         """
         if does_package_exist(package_name, self.test_pypi):
