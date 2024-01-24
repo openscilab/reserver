@@ -2,6 +2,17 @@
 """Reserver Functions."""
 from requests import get
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
+from hashlib import sha256
+from time import time
+
+
+def get_random_name():
+    """
+    Generate a random str based on current timestamp.
+
+    :return: str
+    """
+    return sha256(str(time()).encode("utf-8")).hexdigest()
 
 
 def does_package_exist(suggested_name, test_pypi):
