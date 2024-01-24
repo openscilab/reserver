@@ -1,8 +1,8 @@
 from reserver import Uploader
-from reserver.util import get_random_name
-import os 
+from reserver.reserver_func import get_random_name
+import os
 test_pypi_token = os.environ.get("TEST_PYPI_PASSWORD")
-    
+
 def test_package_exists():
     # test reserved name
     uploader = Uploader(test_pypi_token, is_test_pypi_account= True)
