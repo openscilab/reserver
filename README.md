@@ -11,7 +11,7 @@
     <a href="https://www.python.org/">
         <img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3">
     </a>
-    <a href="TODO">
+    <a href="https://discord.gg/RD2y6SGuY3">
         <img src="TODO" alt="Discord Channel">
     </a>
 </div>
@@ -99,8 +99,8 @@ Just fill an issue and describe it. We'll check it ASAP! or send an email to [in
  
 You can also join our discord server
 
-<a href="TODO">
-  <img src="TODO" alt="Discord Channel">
+<a href="https://discord.gg/RD2y6SGuY3">
+    <img src="TODO?style=for-the-badge" alt="Discord Channel">
 </a>
 
 
