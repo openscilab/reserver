@@ -103,12 +103,16 @@ You can also join our discord server
     <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
 </a>
 
+## References
 
-## Show Your Support
+### flaticon.com
++ box: <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Good Ware - Flaticon</a>
++ reserve plate: <a href="https://www.flaticon.com/free-icons/reserved" title="reserved icons">Reserved icons created by Freepik - Flaticon</a>
 
+
+## Show your support
 
 ### Star this repo
-
 Give a ⭐️ if this project helped you!
 
 ### Donate to our project
