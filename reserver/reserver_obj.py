@@ -74,7 +74,6 @@ class Uploader:
         publish_failed = False
         error = None
         for command in commands:
-            print("running this command: ", command)
             try:
                 check_output(command, shell=True, text=True)
             except CalledProcessError as e:
