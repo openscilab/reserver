@@ -87,7 +87,7 @@ Reserver is an open source Python package that provides functionality to easily 
 ### Secure your desired PyPI package name!
 ```python
 from reserver import Uploader
-uploader = Uploader(PYPI_API_TOKEN, is_test_pypi_account= False)
+uploader = Uploader(PYPI_API_TOKEN, test_pypi= False)
 uploader.upload_to_pypi("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
 ```
 
