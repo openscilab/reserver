@@ -28,8 +28,7 @@ def read_description():
 
 setup(
     name='reserver',
-    packages=[
-        'reserver',],
+    packages=['reserver',],
     version='0.1',
     description='PyPI package name reserver',
     long_description=read_description(),
