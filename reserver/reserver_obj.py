@@ -15,20 +15,21 @@ class Uploader:
     >>> uploader.upload_to_pypi(PACKAGE_NAME) # uploads package to the given test pypi account.
     """
 
-    def __init__(self, api_token, is_test_pypi_account=False):
+    def __init__(self, api_token, test_pypi=False):
         """
         Initialize the Reserver Uploader instance.
 
         :param api_token: pypi account's api token
         :type api_token: str
-        :param is_test_pypi_account: indicates the given api_token is for a test.pypi account or not.
-        :type is_test_pypi_account: bool
+        :param test_pypi: indicates the given api_token is for a test.pypi account or not.
+        :type test_pypi: bool
         :return: an instance of the Reserver Uploader
         """
         self.username = "__token__"
         self.password = api_token
-        self.test_pypi = is_test_pypi_account
+        self.test_pypi = test_pypi
 
+        
     def upload_to_pypi(self, package_name):
         """
         Upload a template package to pypi or test_pypi.
