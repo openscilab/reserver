@@ -5,7 +5,7 @@ from os import environ, path, getcwd, remove
 from shutil import rmtree
 from sys import executable
 from subprocess import check_output, CalledProcessError
-
+from re import sub
 
 class Uploader:
     """
@@ -48,7 +48,9 @@ class Uploader:
         environ["TWINE_PASSWORD"] = self.password
 
         generated_setup_file_path = path.join(getcwd(), package_name + "_setup.py")
-        generated_egginfo_file_path = path.join(getcwd(), package_name + ".egg-info")
+        generated_package_folder = path.join(getcwd(), package_name)
+        package_name_replaced = sub('-', '_', package_name)
+        generated_egginfo_file_path = path.join(getcwd(), package_name_replaced + ".egg-info")
         generated_built_folder = path.join(getcwd(), "build")
         generated_dist_folder = path.join(getcwd(), "dist")
         generated_tar_gz_file = path.join(generated_dist_folder, "*.tar.gz")
@@ -84,6 +86,7 @@ class Uploader:
                 break 
 
         remove(generated_setup_file_path)
+        rmtree(generated_package_folder)
         rmtree(generated_egginfo_file_path)
         rmtree(generated_built_folder)
         rmtree(generated_dist_folder)
