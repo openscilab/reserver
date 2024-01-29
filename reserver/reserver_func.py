@@ -4,6 +4,7 @@ from requests import get
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
 from hashlib import sha256
 from time import time
+from os import mkdir, rmdir
 
 
 def get_random_name():
@@ -58,7 +59,7 @@ except ImportError:
 
 setup(
     name =""" + "\"" + package_name + "\"" + """,
-    packages=[],
+    packages=[""" + "\"" + package_name + "\"" + "," + """],
     version='0.0.0',
     description='This name has been reserved using Reserver',
     long_description=\"\"\"
@@ -91,3 +92,12 @@ setup(
 """
     with open(package_name + "_setup.py", "w+") as f:
         f.writelines(setup_py_content)
+
+    try:
+        mkdir(package_name)
+    except FileExistsError:
+        rmdir(package_name)
+        mkdir(package_name)
+    with open(package_name + "/__init__.py", "w") as f:
+        f.write("# -*- coding: utf-8 -*-\n")
+        f.write("\"\"\"" + package_name + " modules." + "\"\"\"")
