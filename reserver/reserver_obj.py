@@ -83,6 +83,8 @@ class Uploader:
                 if command == commands[-2]:
                     if "403" in error and "Invalid or non-existent authentication information" in error:
                         error = "Invalid or non-existent authentication information(PyPI API Key)."
+                    if "400" in error and "too similar to an existing project" in error:
+                        error = "Given package name is too similar to an existing project in PyPI."
                 break 
 
         remove(generated_setup_file_path)
