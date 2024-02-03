@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
-## [0.1] - 2024-01-31
+## [0.1] - 2024-02-07
 ### Added
 - `Uploader` class
-- check package name existence
-- upload template packate to test.pypi
-- upload template packate to pypi
-- generate template package for a given name
+- Check package name existence
+- Upload template package to test.pypi
+- Upload template package to pypi
+- Generate template package for a given name
+- Handle similiar name existance in pypi
+- Handle issue with "-" character `.egginfo` file name
 
 [Unreleased]: https://github.com/openscilab/reserver/compare/v0.1...dev
 [0.1]: https://github.com/openscilab/reserver/compare/0ae5bb9...v0.1
