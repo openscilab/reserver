@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Reserver Functions."""
+"""Reserver functions."""
 from requests import get
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
 from hashlib import sha256
