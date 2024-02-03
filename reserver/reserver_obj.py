@@ -86,6 +86,12 @@ class Uploader:
                         error = "Given package name is too similar to an existing project in PyPI."
                 break 
 
+        # todo remove env variable
+        if "TWINE_USERNAME" in environ:
+            environ.pop("TWINE_USERNAME")
+        if "TWINE_PASSWORD" in environ:
+            environ.pop("TWINE_PASSWORD")
+
         remove(generated_setup_file_path)
         rmtree(generated_package_folder)
         rmtree(generated_egginfo_file_path)
