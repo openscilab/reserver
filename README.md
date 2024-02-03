@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/openscilab/reserver/raw/main/otherfiles/logo.png" width="300" height="300">
+    <img src="https://github.com/openscilab/reserver/raw/main/otherfiles/reserver.png" width="300" height="300">
     <br/>
     <br/>
     <a href="https://codecov.io/gh/openscilab/reserver">
