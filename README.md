@@ -20,6 +20,7 @@
 
 ## Table of contents
 
+* [Disclaimer](https://github.com/openscilab/reserver#disclaimer)
 * [Overview](https://github.com/openscilab/reserver#overview)
 * [Installation](https://github.com/openscilab/reserver#installation)
 * [Usage](https://github.com/openscilab/reserver#usage)
