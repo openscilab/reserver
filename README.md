@@ -40,7 +40,7 @@
 
 ## Overview
 <p align="justify">
-Reserver is an open source Python package that provides functionality to easily reserve a pypi package name. Have an idea? Reserve the package name instantly before it gets taken!
+Reserver is an open source Python package that offers the ability to quickly reserve a PyPI package name. Got a notion? Before it's taken, immediately reserve the product name!
 </p>
 <table>
     <tr>
