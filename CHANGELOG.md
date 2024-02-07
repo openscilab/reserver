@@ -11,10 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `Uploader` class
 - Check package name existence
-- Upload template package to test.pypi
-- Upload template package to pypi
+- Upload template package to test PyPI
+- Upload template package to PyPI
 - Generate template package for a given name
-- Handle similiar name existance in pypi
+- Handle similar name existence in PyPI
 - Handle issue with "-" character `.egginfo` file name
 
 [Unreleased]: https://github.com/openscilab/reserver/compare/v0.1...dev
