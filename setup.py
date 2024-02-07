@@ -60,7 +60,6 @@ setup(
         'Intended Audience :: End Users/Desktop',
         'Intended Audience :: Manufacturing',
         'Intended Audience :: Science/Research',
-        'Topic :: Development/Kit :: Package name reservation',
 
     ],
     license='MIT',
