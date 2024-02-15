@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
+- `README.md` modified
 ## [0.1] - 2024-02-07
 ### Added
 - `Uploader` class
