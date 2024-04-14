@@ -29,7 +29,19 @@ class Uploader:
         self.password = api_token
         self.test_pypi = test_pypi
 
-        
+
+    def batch_upload_to_pypi(self, *names):
+        """
+        Upload batch of package names to PyPI.
+
+        :param names: packages' names
+        :type names: vararg
+        :return: None
+        """
+        for name in names:
+            self.upload_to_pypi(name)
+
+
     def upload_to_pypi(self, package_name):
         """
         Upload a template package to pypi or test_pypi.
