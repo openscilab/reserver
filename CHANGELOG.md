@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Batch of package names reservation
+- testcase for batch package name reservation in `test_reserver.py`
 ### Changed
 - `README.md` modified
 ## [0.1] - 2024-02-07
