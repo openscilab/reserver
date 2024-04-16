@@ -11,8 +11,7 @@ def test_package_exists():
 def test_batch_packages_names():
     # test batch of package names
     uploader = PyPIUploader(test_pypi_token, test_pypi= True)
-    uploader.batch_upload("numpy", "scikit-learn")
-    assert True == True 
+    assert uploader.batch_upload("numpy", "scikit-learn") == 0
 
 def test_valid_package_invalid_credentials():
     # test not reserved name -> wrong credentials
