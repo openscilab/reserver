@@ -38,8 +38,15 @@ class PyPIUploader:
         :type names: vararg
         :return: None
         """
+        reserved_successfully = 0
         for name in names:
-            self.upload(name)
+            if isinstance(name, list):
+                reserved_successfully += self.batch_upload(*name)
+            else:
+                is_reserved = self.upload(name)
+                if is_reserved:
+                    reserved_successfully += 1
+        return reserved_successfully
 
 
     def upload(self, package_name):
