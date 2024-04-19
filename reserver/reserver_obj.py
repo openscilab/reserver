@@ -7,30 +7,49 @@ from sys import executable
 from subprocess import check_output, CalledProcessError
 from re import sub
 
-class Uploader:
+class PyPIUploader:
     """
-    The Reserver Uploader class reserves a package name by uploading a template repo to pypi account.
+    The Reserver PyPIUploader class reserves a package name by uploading a template repo to pypi account.
 
-    >>> uploader = Uploader(API_TOKEN, is_test_pypi_account = True) # API_TOKEN refers to pypi(or test pypi)'s account api.
+    >>> uploader = PyPIUploader(API_TOKEN, is_test_pypi_account = True) # API_TOKEN refers to pypi(or test pypi)'s account api.
     >>> uploader.upload_to_pypi(PACKAGE_NAME) # uploads package to the given test pypi account.
     """
 
     def __init__(self, api_token, test_pypi=False):
         """
-        Initialize the Reserver Uploader instance.
+        Initialize the Reserver PyPIUploader instance.
 
         :param api_token: pypi account's api token
         :type api_token: str
         :param test_pypi: indicates the given api_token is for a test.pypi account or not.
         :type test_pypi: bool
-        :return: an instance of the Reserver Uploader
+        :return: an instance of the Reserver PyPIUploader
         """
         self.username = "__token__"
         self.password = api_token
         self.test_pypi = test_pypi
 
-        
-    def upload_to_pypi(self, package_name):
+
+    def batch_upload(self, *names):
+        """
+        Upload batch of package names to PyPI.
+
+        :param names: packages' names
+        :type names: vararg
+        :return: None
+        """
+        reserved_successfully = 0
+        for name in names:
+            if isinstance(name, list):
+                reserved_successfully += self.batch_upload(*name)
+            else:
+                is_reserved = self.upload(name)
+                if is_reserved:
+                    reserved_successfully += 1
+        return reserved_successfully
+
+
+    def upload(self, package_name):
         """
         Upload a template package to pypi or test_pypi.
 
