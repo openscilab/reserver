@@ -6,8 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `feature_request.yml` template
+- `config.yml` for issue template
 - `batch_upload` method added to `PyPIUploader`
 ### Changed
+- Bug report template modified
 - `Uploader` changed to `PyPIUploader`
 - `README.md` modified
 ## [0.1] - 2024-02-07
