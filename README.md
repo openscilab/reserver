@@ -2,18 +2,10 @@
     <img src="https://github.com/openscilab/reserver/raw/main/otherfiles/reserver.png" width="300" height="300">
     <br/>
     <br/>
-    <a href="https://codecov.io/gh/openscilab/reserver">
-        <img src="https://codecov.io/gh/openscilab/reserver/branch/main/graph/badge.svg" alt="Codecov"/>
-    </a>
-    <a href="https://badge.fury.io/py/reserver">
-        <img src="https://badge.fury.io/py/reserver.svg" alt="PyPI version" height="18">
-    </a>
-    <a href="https://www.python.org/">
-        <img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3">
-    </a>
-    <a href="https://discord.gg/RD2y6SGuY3">
-        <img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel">
-    </a>
+    <a href="https://codecov.io/gh/openscilab/reserver"><img src="https://codecov.io/gh/openscilab/reserver/branch/main/graph/badge.svg" alt="Codecov"/></a>
+    <a href="https://badge.fury.io/py/reserver"><img src="https://badge.fury.io/py/reserver.svg" alt="PyPI version" height="18"></a>
+    <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
+    <a href="https://discord.gg/RD2y6SGuY3"><img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel"></a>
 </div>
 
 ----------
@@ -91,9 +83,9 @@ Reserver is an open source Python package that offers the ability to quickly
 ## Usage
 ### Secure your desired PyPI package name!
 ```python
-from reserver import Uploader
-uploader = Uploader(PYPI_API_TOKEN, test_pypi= False)
-uploader.upload_to_pypi("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
+from reserver import PyPIUploader
+uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi= False)
+uploader.upload("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
 ```
 
 ## Issues & bug reports
@@ -104,9 +96,7 @@ Just fill an issue and describe it. We'll check it ASAP! or send an email to [in
  
 You can also join our discord server
 
-<a href="https://discord.gg/RD2y6SGuY3">
-    <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
-</a>
+<a href="https://discord.gg/RD2y6SGuY3"><img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel"></a>
 
 ## References
 

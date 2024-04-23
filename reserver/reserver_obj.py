@@ -7,6 +7,7 @@ from sys import executable
 from subprocess import check_output, CalledProcessError
 from re import sub
 
+
 class PyPIUploader:
     """
     The Reserver PyPIUploader class reserves a package name by uploading a template repo to pypi account.
@@ -29,14 +30,13 @@ class PyPIUploader:
         self.password = api_token
         self.test_pypi = test_pypi
 
-
     def batch_upload(self, *names):
         """
         Upload batch of package names to PyPI.
 
         :param names: packages' names
         :type names: vararg
-        :return: None
+        :return: Number of successfully reserved packages
         """
         reserved_successfully = 0
         for name in names:
@@ -48,19 +48,18 @@ class PyPIUploader:
                     reserved_successfully += 1
         return reserved_successfully
 
-
     def upload(self, package_name):
         """
         Upload a template package to pypi or test_pypi.
 
         :param package_name: package name
         :type package_name: str
-        :return: None
+        :return: True if the package is successfully reserved, False otherwise
         """
         if does_package_exist(package_name, self.test_pypi):
             print("This package already exists in PyPI.")
-            return False 
-        
+            return False
+
         generate_template_setup_py(package_name)
 
         environ["TWINE_USERNAME"] = self.username
@@ -103,7 +102,7 @@ class PyPIUploader:
                         error = "Invalid or non-existent authentication information(PyPI API Key)."
                     if "400" in error and "too similar to an existing project" in error:
                         error = "Given package name is too similar to an existing project in PyPI."
-                break 
+                break
 
         # todo remove env variable
         if "TWINE_USERNAME" in environ:
@@ -119,7 +118,7 @@ class PyPIUploader:
 
         if publish_failed:
             print(f"Publish to PyPI failed because of: ", error)
-            return False  
+            return False
         else:
             print("Congratulations! You have successfully reserved the PyPI package: ", package_name)
-            return True 
+            return True
