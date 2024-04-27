@@ -100,7 +100,7 @@ class PyPIUploader:
                     check_output(command, shell=True)
             except CalledProcessError as e:
                 publish_failed = True
-                error = e.output
+                error = e.__str__()
                 if command == commands[-2]:
                     if "403" in error and "Invalid or non-existent authentication information" in error:
                         error = "Invalid or non-existent authentication information(PyPI API Key)."
