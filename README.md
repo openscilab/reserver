@@ -75,7 +75,7 @@ uploader.upload("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
 
 ## Issues & bug reports
 
-Just fill an issue and describe it. We'll check it ASAP! or send an email to [info@openscilab.com](mailto:info@openscilab.com "info@openscilab.com"). 
+Just fill an issue and describe it. We'll check it ASAP! or send an email to [reserver@openscilab.com](mailto:reserver@openscilab.com "reserver@openscilab.com"). 
 
 - Please complete the issue template
  

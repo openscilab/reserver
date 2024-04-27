@@ -34,7 +34,7 @@ setup(
     long_description=read_description(),
     long_description_content_type='text/markdown',
     author='Reserver Development Team',
-    author_email='info@openscilab.com',
+    author_email='reserver@openscilab.com',
     url='https://github.com/openscilab/reserver',
     download_url='https://github.com/openscilab/reserver/tarball/v0.1',
     keywords="python3 python PyPI pip package name reservation",
