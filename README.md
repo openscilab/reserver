@@ -10,21 +10,6 @@
 
 ----------
 
-## Table of contents
-
-* [Disclaimer](https://github.com/openscilab/reserver#disclaimer)
-* [Overview](https://github.com/openscilab/reserver#overview)
-* [Installation](https://github.com/openscilab/reserver#installation)
-* [Usage](https://github.com/openscilab/reserver#usage)
-* [Issues & Bug Reports](https://github.com/openscilab/reserver#issues--bug-reports)
-* [Todo](https://github.com/openscilab/reserver/blob/main/TODO.md)
-* [Contribution](https://github.com/openscilab/reserver/blob/main/.github/CONTRIBUTING.md)
-* [Authors](https://github.com/openscilab/reserver/blob/main/AUTHORS.md)
-* [License](https://github.com/openscilab/reserver/blob/main/LICENSE)
-* [Show Your Support](https://github.com/openscilab/reserver#show-your-support)
-* [Changelog](https://github.com/openscilab/reserver/blob/main/CHANGELOG.md)
-* [Code of Conduct](https://github.com/openscilab/reserver/blob/main/.github/CODE_OF_CONDUCT.md)
-
 ## Disclaimer 
 <p align="justify">
 ⚠️The intention of this package is facilitating the reservation of package names on PyPI for legitimate and appropriate purposes. We explicitly disclaim any responsibility for the misuse or spamming of this tool, particularly in the excessive reservation of package names. Users are advised to be cautious and ensure the  legitimate use of this package to avoid potential consequences such as the suspension of their PyPI account. By using this package, users acknowledge and agree to these terms.
