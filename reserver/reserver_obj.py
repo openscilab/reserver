@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
 from .reserver_func import does_package_exist, generate_template_setup_py
+from .util import has_named_parameter
 from os import environ, path, getcwd, remove
 from shutil import rmtree
 from sys import executable
@@ -93,7 +94,10 @@ class PyPIUploader:
         error = None
         for command in commands:
             try:
-                check_output(command, shell=True, text=True)
+                if has_named_parameter(check_output, "text"):
+                    check_output(command, shell=True, text=True)
+                else:
+                    check_output(command, shell=True)
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
