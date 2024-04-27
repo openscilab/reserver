@@ -66,7 +66,7 @@ Reserver is an open source Python package that offers the ability to quickly
 - Run `pip install .`
 
 ## Usage
-### Secure your desired PyPI package name!
+
 ```python
 from reserver import PyPIUploader
 uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi= False)
@@ -85,9 +85,8 @@ You can also join our discord server
 
 ## References
 
-### flaticon.com
-+ box: <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Good Ware - Flaticon</a>
-+ reserve plate: <a href="https://www.flaticon.com/free-icons/reserved" title="reserved icons">Reserved icons created by Freepik - Flaticon</a>
+1. box: <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Good Ware - Flaticon</a>
+2. reserve plate: <a href="https://www.flaticon.com/free-icons/reserved" title="reserved icons">Reserved icons created by Freepik - Flaticon</a>
 
 
 ## Show your support
