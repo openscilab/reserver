@@ -1,14 +1,15 @@
 # Reserver Release Instructions
 
-#### Last Update: 2024-04-19
+**Last Update: 2024-04-27**
 
 1. Create the `release` branch under `dev`
 2. Update all version tags
 	1. `setup.py`
 	2. `README.md`
-	3. `otherfiles/version_check.py`
-	4. `otherfiles/meta.yaml`
-	5. `reserver/reserver_param.py`
+	3. `SECURITY.md`
+	4. `otherfiles/version_check.py`
+	5. `otherfiles/meta.yaml`
+	6. `reserver/reserver_param.py`
 3. Update `CHANGELOG.md`
 	1. Add a new header under `Unreleased` section (Example: `## [0.1] - 2022-08-17`)
 	2. Add a new compare link to the end of the file (Example: `[0.2]: https://github.com/openscilab/reserver/compare/v0.1...v0.2`)
