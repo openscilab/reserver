@@ -10,24 +10,12 @@
 
 ----------
 
-## Table of contents
-
-* [Disclaimer](https://github.com/openscilab/reserver#disclaimer)
-* [Overview](https://github.com/openscilab/reserver#overview)
-* [Installation](https://github.com/openscilab/reserver#installation)
-* [Usage](https://github.com/openscilab/reserver#usage)
-* [Issues & Bug Reports](https://github.com/openscilab/reserver#issues--bug-reports)
-* [Todo](https://github.com/openscilab/reserver/blob/main/TODO.md)
-* [Contribution](https://github.com/openscilab/reserver/blob/main/.github/CONTRIBUTING.md)
-* [Authors](https://github.com/openscilab/reserver/blob/main/AUTHORS.md)
-* [License](https://github.com/openscilab/reserver/blob/main/LICENSE)
-* [Show Your Support](https://github.com/openscilab/reserver#show-your-support)
-* [Changelog](https://github.com/openscilab/reserver/blob/main/CHANGELOG.md)
-* [Code of Conduct](https://github.com/openscilab/reserver/blob/main/.github/CODE_OF_CONDUCT.md)
-
 ## Disclaimer 
+**⚠️ Warning ⚠️**
+
 <p align="justify">
-⚠️The intention of this package is facilitating the reservation of package names on PyPI for legitimate and appropriate purposes. We explicitly disclaim any responsibility for the misuse or spamming of this tool, particularly in the excessive reservation of package names. Users are advised to be cautious and ensure the  legitimate use of this package to avoid potential consequences such as the suspension of their PyPI account. By using this package, users acknowledge and agree to these terms.
+
+The intention of this package is facilitating the reservation of package names on PyPI for legitimate and appropriate purposes. We explicitly disclaim any responsibility for the misuse or spamming of this tool, particularly in the excessive reservation of package names. Users are advised to be cautious and ensure the  legitimate use of this package to avoid potential consequences such as the suspension of their PyPI account. By using this package, users acknowledge and agree to these terms.
 </p>
 
 ## Overview
@@ -81,7 +69,7 @@ Reserver is an open source Python package that offers the ability to quickly
 - Run `pip install .`
 
 ## Usage
-### Secure your desired PyPI package name!
+
 ```python
 from reserver import PyPIUploader
 uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi= False)
@@ -90,7 +78,7 @@ uploader.upload("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
 
 ## Issues & bug reports
 
-Just fill an issue and describe it. We'll check it ASAP! or send an email to [info@openscilab.com](mailto:info@openscilab.com "info@openscilab.com"). 
+Just fill an issue and describe it. We'll check it ASAP! or send an email to [reserver@openscilab.com](mailto:reserver@openscilab.com "reserver@openscilab.com"). 
 
 - Please complete the issue template
  
@@ -100,9 +88,8 @@ You can also join our discord server
 
 ## References
 
-### flaticon.com
-+ box: <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Good Ware - Flaticon</a>
-+ reserve plate: <a href="https://www.flaticon.com/free-icons/reserved" title="reserved icons">Reserved icons created by Freepik - Flaticon</a>
+1. <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Good Ware - Flaticon</a>
+2. <a href="https://www.flaticon.com/free-icons/reserved" title="reserved icons">Reserved icons created by Freepik - Flaticon</a>
 
 
 ## Show your support
