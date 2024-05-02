@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Reserver functions."""
-from requests import get
+import requests
+import requests.adapters 
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
 from hashlib import sha256
 from time import time
@@ -32,7 +33,18 @@ def does_package_exist(suggested_name, test_pypi):
         url = PYPI_TEST_URL + "/" + suggested_name + "/"
     else:
         url = PYPI_MAIN_URL + "/" + suggested_name + "/"
-    response = get(url, timeout=5)
+
+    s = requests.Session()
+    retries = requests.adapters.Retry(
+        total=5,
+        backoff_factor=0.1,
+        status_forcelist=[ 500, 502, 503, 504 ]
+        )
+
+    s.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
+    s.mount('https://', requests.adapters.HTTPAdapter(max_retries=retries))
+
+    response = s.get(url, timeout=5)
     return not response.status_code == 404
 
 
