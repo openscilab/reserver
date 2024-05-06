@@ -1,6 +1,6 @@
 requests==2.31.0
 setuptools==69.5.1
-wheel==0.35.0
+wheel==0.43.0
 twine==3.5.0
 vulture>=1.0
 bandit>=1.5.1
