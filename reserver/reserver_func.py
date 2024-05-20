@@ -3,7 +3,7 @@
 import re
 import requests
 import requests.adapters 
-from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS
+from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
 from .reserver_errors import ReserverBaseError
 from hashlib import sha256
 from time import time
@@ -74,6 +74,7 @@ def get_package_parameter(parameter, user_parameters, regex=None):
             raise ReserverBaseError("Invalid value for " + parameter + " that should be a valid " + regex)
     return user_parameters[parameter]
 
+
 def generate_template_setup_py(package_name, user_parameters):
     """
     Generate a template `setup.py` file for given package name.
@@ -128,7 +129,6 @@ setup(
 )
 
 """
-    print(setup_py_content)
     with open(package_name + "_setup.py", "w+") as f:
         f.writelines(setup_py_content)
 
@@ -140,3 +140,13 @@ setup(
     with open(package_name + "/__init__.py", "w") as f:
         f.write("# -*- coding: utf-8 -*-\n")
         f.write("\"\"\"" + package_name + " modules." + "\"\"\"")
+
+def reserver_help():
+    """
+    Print Reserver details.
+
+    :return: None
+    """
+    print(OVERVIEW)
+    print("Repo : https://github.com/openscilab/reserver")
+    print("Webpage : https://openscilab.com/\n")
