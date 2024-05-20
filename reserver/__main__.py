@@ -13,7 +13,6 @@ def main():
 
     :return: None
     """
-
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--name',
