@@ -51,6 +51,17 @@ def does_package_exist(suggested_name, test_pypi):
 
 
 def get_package_parameter(parameter, user_parameters, regex=None):
+    """
+    Get the value for the associated package parameter.
+
+    :param parameter: one of the customizable package parameters
+    :type parameter: str
+    :param user_parameters: user-customized package parameters
+    :type user_parameters: dict
+    :param regex: name of the regex to get applied
+    :type regex: str
+    :return: value of the associated parameter
+    """
     if not user_parameters or not parameter in user_parameters:
         if parameter in PACKAGE_PARAMETERS:
             return PACKAGE_PARAMETERS[parameter]
