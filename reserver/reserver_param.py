@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 """Parameters and constants."""
+OVERVIEW = """
+A Python that offers the ability to quickly reserve a PyPI package name.
+Got a notion? Before it's taken, immediately reserve the product name!
+
+"""
 RESERVER_VERSION = "0.1"
 RESERVER_NAME = "reserver"
 PYPI_TEST_URL = "https://test.pypi.org/project"
