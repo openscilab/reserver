@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Reserver functions."""
+import re
 import requests
 import requests.adapters 
-from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
+from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS
+from .reserver_errors import ReserverBaseError
 from hashlib import sha256
 from time import time
 from os import mkdir, rmdir
@@ -48,7 +50,20 @@ def does_package_exist(suggested_name, test_pypi):
     return not response.status_code == 404
 
 
-def generate_template_setup_py(package_name):
+def get_package_parameter(parameter, user_parameters, regex=None):
+    if not user_parameters or not parameter in user_parameters:
+        if parameter in PACKAGE_PARAMETERS:
+            return PACKAGE_PARAMETERS[parameter]
+        else:
+            raise ReserverBaseError("Given parameter doesn't exist among the supported user allowed parameters.")
+    if regex:
+        if re.match(VALIDATIONS[regex], user_parameters[parameter]):
+            return user_parameters[parameter]
+        else:
+            raise ReserverBaseError("Invalid value for " + parameter + " that should be a valid " + regex)
+    return user_parameters[parameter]
+
+def generate_template_setup_py(package_name, user_parameters):
     """
     Generate a template `setup.py` file for given package name.
 
@@ -73,18 +88,18 @@ setup(
     name =""" + "\"" + package_name + "\"" + """,
     packages=[""" + "\"" + package_name + "\"" + "," + """],
     version='0.0.0',
-    description='This name has been reserved using Reserver',
+    description=""" + "\"" + get_package_parameter("description", user_parameters) + "\"" + """,
     long_description=\"\"\"
     This name has been reserved using [Reserver](https://github.com/openscilab/reserver).
     \"\"\",
     long_description_content_type='text/markdown',
-    author='Development Team',
-    author_email='test@test.com',
-    url='https://url.com',
-    download_url='https://download_url.com',
+    author=""" + "\"" + get_package_parameter("author", user_parameters) + "\"" + """,
+    author_email=""" + "\"" + get_package_parameter("author_email", user_parameters, "email") + "\"" + """,
+    url=""" + "\"" + get_package_parameter("url", user_parameters, "url") + "\"" + """,
+    download_url=""" + "\"" + get_package_parameter("download_url", user_parameters, "url") + "\"" + """,
     keywords="python3 python reserve reserver reserved",
     project_urls={
-            'Source': 'https://github.com/source',
+            'Source':""" + "\"" + get_package_parameter("source", user_parameters, "url") + "\"" + """,
     },
     install_requires="",
     python_requires='>=3.6',
@@ -98,10 +113,11 @@ setup(
         \'Programming Language :: Python :: 3.11\',
         \'Programming Language :: Python :: 3.12\',
     ],
-    license='MIT',
+    license=""" + "\"" + get_package_parameter("license", user_parameters) + "\"" + """,
 )
 
 """
+    print(setup_py_content)
     with open(package_name + "_setup.py", "w+") as f:
         f.writelines(setup_py_content)
 
