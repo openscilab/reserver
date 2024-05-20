@@ -49,7 +49,7 @@ class PyPIUploader:
                     reserved_successfully += 1
         return reserved_successfully
 
-    def upload(self, package_name):
+    def upload(self, package_name, user_parameters=None):
         """
         Upload a template package to pypi or test_pypi.
 
@@ -61,7 +61,7 @@ class PyPIUploader:
             print("This package already exists in PyPI.")
             return False
 
-        generate_template_setup_py(package_name)
+        generate_template_setup_py(package_name, user_parameters)
 
         environ["TWINE_USERNAME"] = self.username
         environ["TWINE_PASSWORD"] = self.password
