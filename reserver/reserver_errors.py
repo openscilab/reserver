@@ -4,5 +4,5 @@
 
 class ReserverBaseError(Exception):
     """Reserver base error class."""
-    
+
     pass

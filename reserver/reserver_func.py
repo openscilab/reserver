@@ -2,7 +2,7 @@
 """Reserver functions."""
 import re
 import requests
-import requests.adapters 
+import requests.adapters
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
 from .reserver_errors import ReserverBaseError
 from hashlib import sha256
@@ -40,8 +40,8 @@ def does_package_exist(suggested_name, test_pypi):
     retries = requests.adapters.Retry(
         total=5,
         backoff_factor=0.1,
-        status_forcelist=[ 500, 502, 503, 504 ]
-        )
+        status_forcelist=[500, 502, 503, 504]
+    )
 
     s.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
     s.mount('https://', requests.adapters.HTTPAdapter(max_retries=retries))
@@ -62,7 +62,7 @@ def get_package_parameter(parameter, user_parameters, regex=None):
     :type regex: str
     :return: value of the associated parameter
     """
-    if not user_parameters or not parameter in user_parameters:
+    if not user_parameters or parameter not in user_parameters:
         if parameter in PACKAGE_PARAMETERS:
             return PACKAGE_PARAMETERS[parameter]
         else:
@@ -140,6 +140,7 @@ setup(
     with open(package_name + "/__init__.py", "w") as f:
         f.write("# -*- coding: utf-8 -*-\n")
         f.write("\"\"\"" + package_name + " modules." + "\"\"\"")
+
 
 def reserver_help():
     """

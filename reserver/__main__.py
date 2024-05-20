@@ -23,7 +23,7 @@ def main():
     )
     parser.add_argument(
         '--token',
-        help='The token for (main|test) PyPI account', 
+        help='The token for (main|test) PyPI account',
         required=True
     )
     parser.add_argument('--test', action='store_true', help='Flag identifying test account or not')
