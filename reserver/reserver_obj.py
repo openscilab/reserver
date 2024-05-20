@@ -55,6 +55,8 @@ class PyPIUploader:
 
         :param package_name: package name
         :type package_name: str
+        :param user_parameters: user-customized package parameters
+        :type user_parameters: dict
         :return: True if the package is successfully reserved, False otherwise
         """
         if does_package_exist(package_name, self.test_pypi):
