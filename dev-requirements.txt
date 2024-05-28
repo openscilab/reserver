@@ -1,4 +1,4 @@
-requests==2.31.0
+requests==2.32.2
 setuptools==70.0.0
 wheel==0.43.0
 twine==5.1.0
