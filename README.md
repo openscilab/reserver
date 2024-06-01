@@ -70,10 +70,26 @@ Reserver is an open source Python package that offers the ability to quickly
 
 ## Usage
 
+### Programmatically 
 ```python
 from reserver import PyPIUploader
 uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi= False)
 uploader.upload("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
+```
+### CLI
+⚠️ You can use `reserver` or `python -m reserver` to run this program
+#### Version
+```console
+reserver -v
+reserver --version
+```
+#### Reserve in test PyPI (test.pypi.org)
+```console
+reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN --test
+```
+#### Reserve in main PyPI (pypi.org)
+```console
+reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN
 ```
 
 ## Issues & bug reports
