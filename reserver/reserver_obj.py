@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
 from .reserver_func import does_package_exist, generate_template_setup_py
-from .util import has_named_parameter
+from .util import has_named_parameter, remove_dir
 from os import environ, path, getcwd, remove
-from shutil import rmtree
 from sys import executable
 from subprocess import check_output, CalledProcessError
 from re import sub
@@ -78,7 +77,7 @@ class PyPIUploader:
         generated_wheel_file = path.join(generated_dist_folder, "*.whl")
         # prevent from uploading any other previously build library in this path.
         if path.exists(generated_dist_folder):
-            rmtree(generated_dist_folder)
+            remove_dir(generated_dist_folder)
 
         commands = [executable + " " + generated_setup_file_path + " sdist bdist_wheel "]
         if self.test_pypi:
@@ -117,10 +116,10 @@ class PyPIUploader:
             environ.pop("TWINE_PASSWORD")
 
         remove(generated_setup_file_path)
-        rmtree(generated_package_folder)
-        rmtree(generated_egginfo_file_path)
-        rmtree(generated_built_folder)
-        rmtree(generated_dist_folder)
+        remove_dir(generated_package_folder)
+        remove_dir(generated_egginfo_file_path)
+        remove_dir(generated_built_folder)
+        remove_dir(generated_dist_folder)
 
         if publish_failed:
             print(f"Publish to PyPI failed because of: ", error)
