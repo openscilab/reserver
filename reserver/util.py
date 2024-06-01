@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """utility module."""
 from inspect import signature
-import os 
+import os
 import shutil
 
 
