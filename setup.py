@@ -64,4 +64,9 @@ setup(
 
     ],
     license='MIT',
+    entry_points={
+            'console_scripts': [
+                'reserver = reserver.__main__:main',
+            ]
+    }
 )
