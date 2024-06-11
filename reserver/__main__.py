@@ -28,7 +28,7 @@ def main():
         metavar="(TEST.PYPI|PYPI)_TOKEN",
         help='The token for (main|test) PyPI account',
     )
-    parser.add_argument('--test', action='store_true', help='Flag identifying test account or not', default=False)
+    parser.add_argument('--test', action='store_true', help='test PyPI (test.pypi.org)')
     parser.add_argument('--version', help="version", action='store_true', default=False)
     parser.add_argument('-v', help="version", action='store_true', default=False)
     args = parser.parse_known_args()[0]

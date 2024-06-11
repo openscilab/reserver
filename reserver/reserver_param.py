@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """Parameters and constants."""
 OVERVIEW = """
-A Python that offers the ability to quickly reserve a PyPI package name.
-Got a notion? Before it's taken, immediately reserve the product name!
-
+Reserver is an open source Python package that offers the ability to quickly reserve a PyPI package name. Got a notion? Before it's taken, immediately reserve the product name!
 """
 RESERVER_VERSION = "0.1"
 RESERVER_NAME = "reserver"
