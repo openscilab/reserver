@@ -34,6 +34,7 @@ def main():
     args = parser.parse_known_args()[0]
     if args.version or args.v:
         print(RESERVER_VERSION)
+        return
     names = args.name
     test_pypi = args.test
     pypi_token = args.token
