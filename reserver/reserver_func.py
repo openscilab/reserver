@@ -4,6 +4,7 @@ import re
 import requests
 import requests.adapters
 from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
+from .reserver_param import INVALID_PACKAGE_PARAMETER_NAME_ERROR, INVALID_PACKAGE_PARAMETER_VALUE_ERROR
 from .reserver_errors import ReserverBaseError
 from hashlib import sha256
 from time import time
@@ -66,12 +67,12 @@ def get_package_parameter(parameter, user_parameters, regex=None):
         if parameter in PACKAGE_PARAMETERS:
             return PACKAGE_PARAMETERS[parameter]
         else:
-            raise ReserverBaseError("Given parameter doesn't exist among the supported user allowed parameters.")
+            raise ReserverBaseError(INVALID_PACKAGE_PARAMETER_NAME_ERROR)
     if regex:
         if re.match(VALIDATIONS[regex], user_parameters[parameter]):
             return user_parameters[parameter]
         else:
-            raise ReserverBaseError("Invalid value for " + parameter + " that should be a valid " + regex)
+            raise ReserverBaseError(INVALID_PACKAGE_PARAMETER_VALUE_ERROR.format(parameter=parameter, regex=regex))
     return user_parameters[parameter]
 
 

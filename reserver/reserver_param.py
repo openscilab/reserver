@@ -22,3 +22,5 @@ VALIDATIONS = {
     "email": r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
     "url": r'^(http|https)://[a-zA-Z0-9.-_]+\.[a-zA-Z]{2,}(/\S*)?$',
 }
+INVALID_PACKAGE_PARAMETER_NAME_ERROR = "Given parameter doesn't exist among the supported user allowed parameters."
+INVALID_PACKAGE_PARAMETER_VALUE_ERROR = "Invalid value for {parameter} that should be a valid {regex}"
