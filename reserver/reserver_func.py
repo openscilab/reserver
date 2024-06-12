@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 """Reserver functions."""
+import re
 import requests
-import requests.adapters 
-from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL
+import requests.adapters
+from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
+from .reserver_param import INVALID_PACKAGE_PARAMETER_NAME_ERROR, INVALID_PACKAGE_PARAMETER_VALUE_ERROR
+from .reserver_errors import ReserverBaseError
 from hashlib import sha256
 from time import time
 from os import mkdir, rmdir
@@ -38,8 +41,8 @@ def does_package_exist(suggested_name, test_pypi):
     retries = requests.adapters.Retry(
         total=5,
         backoff_factor=0.1,
-        status_forcelist=[ 500, 502, 503, 504 ]
-        )
+        status_forcelist=[500, 502, 503, 504]
+    )
 
     s.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
     s.mount('https://', requests.adapters.HTTPAdapter(max_retries=retries))
@@ -48,7 +51,32 @@ def does_package_exist(suggested_name, test_pypi):
     return not response.status_code == 404
 
 
-def generate_template_setup_py(package_name):
+def get_package_parameter(parameter, user_parameters, regex=None):
+    """
+    Get the value for the associated package parameter.
+
+    :param parameter: one of the customizable package parameters
+    :type parameter: str
+    :param user_parameters: user-customized package parameters
+    :type user_parameters: dict
+    :param regex: name of the regex to get applied
+    :type regex: str
+    :return: value of the associated parameter
+    """
+    if not user_parameters or parameter not in user_parameters:
+        if parameter in PACKAGE_PARAMETERS:
+            return PACKAGE_PARAMETERS[parameter]
+        else:
+            raise ReserverBaseError(INVALID_PACKAGE_PARAMETER_NAME_ERROR)
+    if regex:
+        if re.match(VALIDATIONS[regex], user_parameters[parameter]):
+            return user_parameters[parameter]
+        else:
+            raise ReserverBaseError(INVALID_PACKAGE_PARAMETER_VALUE_ERROR.format(parameter=parameter, regex=regex))
+    return user_parameters[parameter]
+
+
+def generate_template_setup_py(package_name, user_parameters):
     """
     Generate a template `setup.py` file for given package name.
 
@@ -73,18 +101,18 @@ setup(
     name =""" + "\"" + package_name + "\"" + """,
     packages=[""" + "\"" + package_name + "\"" + "," + """],
     version='0.0.0',
-    description='This name has been reserved using Reserver',
+    description=""" + "\"" + get_package_parameter("description", user_parameters) + "\"" + """,
     long_description=\"\"\"
     This name has been reserved using [Reserver](https://github.com/openscilab/reserver).
     \"\"\",
     long_description_content_type='text/markdown',
-    author='Development Team',
-    author_email='test@test.com',
-    url='https://url.com',
-    download_url='https://download_url.com',
+    author=""" + "\"" + get_package_parameter("author", user_parameters) + "\"" + """,
+    author_email=""" + "\"" + get_package_parameter("author_email", user_parameters, "email") + "\"" + """,
+    url=""" + "\"" + get_package_parameter("url", user_parameters, "url") + "\"" + """,
+    download_url=""" + "\"" + get_package_parameter("download_url", user_parameters, "url") + "\"" + """,
     keywords="python3 python reserve reserver reserved",
     project_urls={
-            'Source': 'https://github.com/source',
+            'Source':""" + "\"" + get_package_parameter("source", user_parameters, "url") + "\"" + """,
     },
     install_requires="",
     python_requires='>=3.6',
@@ -98,7 +126,7 @@ setup(
         \'Programming Language :: Python :: 3.11\',
         \'Programming Language :: Python :: 3.12\',
     ],
-    license='MIT',
+    license=""" + "\"" + get_package_parameter("license", user_parameters) + "\"" + """,
 )
 
 """
@@ -113,3 +141,14 @@ setup(
     with open(package_name + "/__init__.py", "w") as f:
         f.write("# -*- coding: utf-8 -*-\n")
         f.write("\"\"\"" + package_name + " modules." + "\"\"\"")
+
+
+def reserver_help():
+    """
+    Print Reserver details.
+
+    :return: None
+    """
+    print(OVERVIEW)
+    print("Repo : https://github.com/openscilab/reserver")
+    print("Webpage : https://openscilab.com/\n")
