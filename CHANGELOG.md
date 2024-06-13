@@ -6,11 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+### Changed
+## [0.2] - 2024-06-17
+### Added
+- `CLI` Handler
+- `Python 3.6` support
+- `has_named_parameter` method in `util.py`
 - `feature_request.yml` template
 - `config.yml` for issue template
-- `batch_upload` method added to `PyPIUploader`
+- `batch_upload` method in `PyPIUploader`
 - `SECURITY.md`
 ### Changed
+- `upload` method in `reserver_obj.py`
+- `does_package_exist` method in `reserver_func.py`
+- `test.yml` for `Python 3.6` support
 - Logo updated
 - Bug report template modified
 - `Uploader` changed to `PyPIUploader`
@@ -25,5 +34,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Handle similar name existence in PyPI
 - Handle issue with "-" character `.egginfo` file name
 
-[Unreleased]: https://github.com/openscilab/reserver/compare/v0.1...dev
+[Unreleased]: https://github.com/openscilab/reserver/compare/v0.2...dev
+[0.2]: https://github.com/openscilab/reserver/compare/v0.1...v0.2
 [0.1]: https://github.com/openscilab/reserver/compare/0ae5bb9...v0.1
