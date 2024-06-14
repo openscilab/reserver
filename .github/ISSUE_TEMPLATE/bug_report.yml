@@ -84,6 +84,7 @@ body:
       label: Reserver version
       description: Which version of Reserver are you using?
       options:
+        - Reserver 0.2
         - Reserver 0.1
       default: 0
     validations:
