@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 ## [0.2] - 2024-06-17
 ### Added
-- `CLI` Handler
+- `CLI` handler
 - `Python 3.6` support
 - `has_named_parameter` method in `util.py`
 - `feature_request.yml` template
