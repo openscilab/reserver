@@ -103,9 +103,10 @@ class PyPIUploader:
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
-                print(chardet.detect(error)['encoding'])
-                print(error.decode('utf-8'))
-                error = error.decode(chardet.detect(error)['encoding'])
+                try:
+                    error = error.decode(chardet.detect(error)['encoding'])
+                except:
+                    error = error.decode('utf-8')
                 if command == commands[-2]:
                     if "403" in error and "Invalid or non-existent authentication information" in error:
                         error = "Invalid or non-existent authentication information(PyPI API Key)."
