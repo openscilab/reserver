@@ -8,6 +8,11 @@ def test_package_exists():
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
     assert uploader.upload("numpy") == False
 
+def test_standard_module_conflict():
+    # try to reserve a standard python library module
+    uploader = PyPIUploader(test_pypi_token, test_pypi=True)
+    assert uploader.upload("os") == False
+
 def test_batch_packages_names():
     # test batch of package names
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
