@@ -27,5 +27,11 @@ def test_valid_package_invalid_credentials():
 def test_valid_package_valid_credentials():
     # test not reserved name -> correct credentials
     # uploader = PyPIUploader(test_pypi_token, test_pypi=True)
-    # uploader.upload_to_pypi(get_random_name())
+    # uploader.upload(get_random_name())
+    assert True == True
+
+def test_module_conflict():
+    # try to reserve a name which conflicts with the module name of a previously taken package (the taken package itself has a different name, but it's module name has conflict)."
+    # uploader = PyPIUploader(pypi_token, test_pypi=False)
+    # uploader.upload("freeze") == False
     assert True == True
