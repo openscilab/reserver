@@ -113,7 +113,7 @@ class PyPIUploader:
                     if "400" in error and "too similar to an existing project" in error:
                         error = "Given package name is too similar to an existing project in PyPI."
                     if "400" in error and "isn't allowed." in error:
-                        error = "Given package name has conflict with the module name of a previously taken package (the taken package itself has a different name, but it's module name has conflict)."
+                        error = "Given package name has conflict with the module name of a previously taken package."
                     if "400" in error and "isn't allowed (conflict with Python Standard Library" in error:
                         error = "Given package name has conflict with Python Standard Library module name."
                 break
