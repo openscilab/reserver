@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
-from .reserver_func import does_package_exist, generate_template_setup_py
-from .util import has_named_parameter, remove_dir
-from os import environ, path, getcwd, remove
-from sys import executable
-from subprocess import check_output, CalledProcessError
+import chardet
 from re import sub
+from sys import executable
+from os import environ, path, getcwd, remove
+from .util import has_named_parameter, remove_dir
+from subprocess import check_output, CalledProcessError
+from .reserver_func import does_package_exist, generate_template_setup_py
 
 
 class PyPIUploader:
@@ -101,15 +102,22 @@ class PyPIUploader:
                     check_output(command, shell=True)
             except CalledProcessError as e:
                 publish_failed = True
-                error = e.__str__()
+                error = e.output
+                try:
+                    error = error.decode(chardet.detect(error)['encoding'])
+                except:
+                    error = error.decode('utf-8')
                 if command == commands[-2]:
                     if "403" in error and "Invalid or non-existent authentication information" in error:
                         error = "Invalid or non-existent authentication information(PyPI API Key)."
                     if "400" in error and "too similar to an existing project" in error:
                         error = "Given package name is too similar to an existing project in PyPI."
+                    if "400" in error and "isn't allowed." in error:
+                        error = "Given package name has conflict with the module name of a previously taken package."
+                    if "400" in error and "isn't allowed (conflict with Python Standard Library" in error:
+                        error = "Given package name has conflict with Python Standard Library module name."
                 break
 
-        # todo remove env variable
         if "TWINE_USERNAME" in environ:
             environ.pop("TWINE_USERNAME")
         if "TWINE_PASSWORD" in environ:

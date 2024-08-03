@@ -1,12 +1,19 @@
 from reserver import PyPIUploader
 from reserver.reserver_func import get_random_name
 import os
-test_pypi_token = os.environ.get("TEST_PYPI_PASSWORD")
+
+test_pypi_token = os.environ.get("TWINE_TEST_PASSWORD")
+pypi_token = os.environ.get("TWINE_PASSWORD")
 
 def test_package_exists():
     # test reserved name
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
     assert uploader.upload("numpy") == False
+
+def test_standard_module_conflict():
+    # try to reserve a standard python library module
+    uploader = PyPIUploader(test_pypi_token, test_pypi=True)
+    assert uploader.upload("os") == False
 
 def test_batch_packages_names():
     # test batch of package names
@@ -22,5 +29,10 @@ def test_valid_package_invalid_credentials():
 def test_valid_package_valid_credentials():
     # test not reserved name -> correct credentials
     # uploader = PyPIUploader(test_pypi_token, test_pypi=True)
-    # uploader.upload_to_pypi(get_random_name())
+    # uploader.upload(get_random_name())
     assert True == True
+
+def test_module_conflict():
+    # try to reserve a name which conflicts with the module name of a previously taken package (the taken package itself has a different name, but it's module name has conflict)."
+    uploader = PyPIUploader(pypi_token, test_pypi=False)
+    assert uploader.upload("freeze") == False
