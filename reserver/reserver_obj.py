@@ -6,9 +6,9 @@ from sys import executable
 from os import environ, path, getcwd, remove
 from .reserver_errors import ReserverBaseError
 from subprocess import check_output, CalledProcessError
+from .reserver_param import UNEQUAL_PARAM_NAME_LENGTH_ERROR
 from .util import has_named_parameter, remove_dir, read_json
 from .reserver_func import does_package_exist, generate_template_setup_py
-from .reserver_param import INVALID_INPUT_USER_PARAM, UNEQUAL_PARAM_NAME_LENGTH_ERROR
 
 class PyPIUploader:
     """
