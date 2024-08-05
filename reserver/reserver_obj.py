@@ -75,6 +75,9 @@ class PyPIUploader:
             print("This package already exists in PyPI.")
             return False
 
+        if user_parameters != None:
+            user_parameters = read_json(user_parameters)
+        
         generate_template_setup_py(package_name, user_parameters)
 
         environ["TWINE_USERNAME"] = self.username
