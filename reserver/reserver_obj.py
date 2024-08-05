@@ -4,10 +4,11 @@ import chardet
 from re import sub
 from sys import executable
 from os import environ, path, getcwd, remove
-from .util import has_named_parameter, remove_dir
+from .reserver_errors import ReserverBaseError
 from subprocess import check_output, CalledProcessError
+from .util import has_named_parameter, remove_dir, read_json
 from .reserver_func import does_package_exist, generate_template_setup_py
-
+from .reserver_param import INVALID_INPUT_USER_PARAM, UNEQUAL_PARAM_NAME_LENGTH_ERROR
 
 class PyPIUploader:
     """
@@ -36,7 +37,9 @@ class PyPIUploader:
         Upload batch of package names to PyPI.
 
         :param names: packages' names
-        :type names: vararg
+        :type names: list
+        :param user_params_path: path to user-defined packages' parameters
+        :type user_params_path: None | str | list
         :return: Number of successfully reserved packages
         """
         reserved_successfully = 0
@@ -67,8 +70,8 @@ class PyPIUploader:
 
         :param package_name: package name
         :type package_name: str
-        :param user_parameters: user-customized package parameters
-        :type user_parameters: dict
+        :param user_parameters: path to the .json file containing user-defined package parameters
+        :type user_parameters: str
         :return: True if the package is successfully reserved, False otherwise
         """
         if does_package_exist(package_name, self.test_pypi):
