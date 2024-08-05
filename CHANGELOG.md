@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - more testcases in conflict cases
+- `batch_upload` tests
+- `read_json` method in `util.py`
 ### Changed
 - `upload` method in `reserver_obj.py`
+- `batch_upload` method `reserver_obj.py`
 ## [0.2] - 2024-06-17
 ### Added
 - `CLI` handler
