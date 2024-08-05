@@ -31,7 +31,7 @@ class PyPIUploader:
         self.password = api_token
         self.test_pypi = test_pypi
 
-    def batch_upload(self, *names):
+    def batch_upload(self, names, user_params_path=None):
         """
         Upload batch of package names to PyPI.
 
@@ -40,13 +40,25 @@ class PyPIUploader:
         :return: Number of successfully reserved packages
         """
         reserved_successfully = 0
-        for name in names:
-            if isinstance(name, list):
-                reserved_successfully += self.batch_upload(*name)
-            else:
-                is_reserved = self.upload(name)
-                if is_reserved:
+        if user_params_path == None:
+            for name in names:
+                if self.upload(name):
                     reserved_successfully += 1
+        elif isinstance(user_params_path, str):
+            for name in names:
+                if self.upload(name, user_parameters=user_params_path):
+                    reserved_successfully += 1
+        elif isinstance(user_params_path, list):
+            if len(user_params_path) == 1:
+                for name in names:
+                    if self.upload(name, user_parameters=user_params_path[0]):
+                        reserved_successfully += 1
+            elif len(user_params_path) == len(names):
+                for index, name in enumerate(names):
+                    if self.upload(name, user_parameters=user_params_path[index]):
+                        reserved_successfully += 1
+            else:
+                raise ReserverBaseError(UNEQUAL_PARAM_NAME_LENGTH_ERROR)
         return reserved_successfully
 
     def upload(self, package_name, user_parameters=None):
