@@ -36,3 +36,11 @@ def test_module_conflict():
     # try to reserve a name which conflicts with the module name of a previously taken package (the taken package itself has a different name, but it's module name has conflict)."
     uploader = PyPIUploader(pypi_token, test_pypi=False)
     assert uploader.upload("freeze") == False
+
+def test_batch_upload():
+    # try to reserve two non taken package names with per package custom setup.py parameters
+    uploader = PyPIUploader(test_pypi_token, True)
+    assert uploader.batch_upload(
+        [get_random_name(), get_random_name() + get_random_name()],
+        ["config.json", "config2.json"]
+        ) == 2
