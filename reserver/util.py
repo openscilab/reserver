@@ -46,8 +46,6 @@ def read_json(file_name):
     """
     if not isinstance(file_name, str):
         raise ReserverBaseError(INVALID_CONFIG_FILE_NAME_ERROR)
-    if ".json" not in file_name:
-        file_name = file_name + ".json"
     if os.path.isfile(file_name):
         config_file = open(file_name)
         return json.load(config_file)
