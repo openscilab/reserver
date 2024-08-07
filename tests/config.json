@@ -1,0 +1,9 @@
+{
+    "description": "[config] This name has been reserved using Reserver",
+    "author": "[config] Development Team",
+    "author_email": "configtest@test.com",
+    "url": "https://configurl.com",
+    "download_url": "https://configdownload_url.com",
+    "source": "https://configgithub.com/source",
+    "license": "[config] MIT"
+}

@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 """utility module."""
-from inspect import signature
 import os
+import json
 import shutil
-
+from inspect import signature
+from .reserver_errors import ReserverBaseError
+from .reserver_param import INVALID_CONFIG_FILE_NAME_ERROR, PARAM_FILE_DOES_NOT_EXIST_ERROR
 
 def has_named_parameter(func, param_name):
     """
@@ -32,3 +34,20 @@ def remove_dir(dirpath):
     """
     if os.path.exists(dirpath) and os.path.isdir(dirpath):
         shutil.rmtree(dirpath)
+
+
+def read_json(file_name):
+    """
+    Read the json file and return the python obj of it.
+
+    :param file_name: name of the .json file
+    :type file_name: str
+    :return: obj
+    """
+    if not isinstance(file_name, str):
+        raise ReserverBaseError(INVALID_CONFIG_FILE_NAME_ERROR)
+    if os.path.isfile(file_name):
+        config_file = open(file_name)
+        return json.load(config_file)
+    else:
+        raise ReserverBaseError(PARAM_FILE_DOES_NOT_EXIST_ERROR)

@@ -4,10 +4,11 @@ import chardet
 from re import sub
 from sys import executable
 from os import environ, path, getcwd, remove
-from .util import has_named_parameter, remove_dir
+from .reserver_errors import ReserverBaseError
 from subprocess import check_output, CalledProcessError
+from .reserver_param import UNEQUAL_PARAM_NAME_LENGTH_ERROR
+from .util import has_named_parameter, remove_dir, read_json
 from .reserver_func import does_package_exist, generate_template_setup_py
-
 
 class PyPIUploader:
     """
@@ -31,22 +32,36 @@ class PyPIUploader:
         self.password = api_token
         self.test_pypi = test_pypi
 
-    def batch_upload(self, *names):
+    def batch_upload(self, names, user_params_path=None):
         """
         Upload batch of package names to PyPI.
 
         :param names: packages' names
-        :type names: vararg
+        :type names: list
+        :param user_params_path: path to user-defined packages' parameters
+        :type user_params_path: None | str | list
         :return: Number of successfully reserved packages
         """
         reserved_successfully = 0
-        for name in names:
-            if isinstance(name, list):
-                reserved_successfully += self.batch_upload(*name)
-            else:
-                is_reserved = self.upload(name)
-                if is_reserved:
+        if user_params_path == None:
+            for name in names:
+                if self.upload(name):
                     reserved_successfully += 1
+        elif isinstance(user_params_path, str):
+            for name in names:
+                if self.upload(name, user_parameters=user_params_path):
+                    reserved_successfully += 1
+        elif isinstance(user_params_path, list):
+            if len(user_params_path) == 1:
+                for name in names:
+                    if self.upload(name, user_parameters=user_params_path[0]):
+                        reserved_successfully += 1
+            elif len(user_params_path) == len(names):
+                for index, name in enumerate(names):
+                    if self.upload(name, user_parameters=user_params_path[index]):
+                        reserved_successfully += 1
+            else:
+                raise ReserverBaseError(UNEQUAL_PARAM_NAME_LENGTH_ERROR)
         return reserved_successfully
 
     def upload(self, package_name, user_parameters=None):
@@ -55,14 +70,17 @@ class PyPIUploader:
 
         :param package_name: package name
         :type package_name: str
-        :param user_parameters: user-customized package parameters
-        :type user_parameters: dict
+        :param user_parameters: path to the .json file containing user-defined package parameters
+        :type user_parameters: str
         :return: True if the package is successfully reserved, False otherwise
         """
         if does_package_exist(package_name, self.test_pypi):
             print("This package already exists in PyPI.")
             return False
 
+        if user_parameters != None:
+            user_parameters = read_json(user_parameters)
+        
         generate_template_setup_py(package_name, user_parameters)
 
         environ["TWINE_USERNAME"] = self.username
