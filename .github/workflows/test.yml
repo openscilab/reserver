@@ -27,10 +27,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install .
-      - name: Smoke test
+      - name: CLI Tests - Version Check
         run: |
           python -m reserver --version
           reserver --version
+      - name: CLI Tests - Invalid Token
+        run: |
+          python -m reserver --token "invalid_token" --test --name numpy
+          reserver --token "invalid_token" --test --name numpy
+      - name: CLI Tests - Valid Token + Invalid Name (already taken)
+        run: |
+          python -m reserver --token "${{ secrets.TEST_PYPI_PASSWORD }}" --test --name numpy
+          reserver --token "${{ secrets.TEST_PYPI_PASSWORD }}" --test --name numpy
       - name: Test requirements Installation
         run: |
           python otherfiles/requirements-splitter.py
