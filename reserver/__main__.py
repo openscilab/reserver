@@ -16,10 +16,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--name',
-        nargs='?',
+        nargs='*',
         type=str,
         metavar="PACKAGE_NAME",
         help='Name(s) to get reserved',
+    )
+    parser.add_argument(
+        '--param',
+        nargs='*',
+        type=str,
+        metavar="PACKAGE_PARAM",
+        help='Path to JSON file(s) containing package(s) parameters to set',
     )
     parser.add_argument(
         '--token',
@@ -36,10 +43,11 @@ def main():
         print(RESERVER_VERSION)
         return
     names = args.name
+    params = args.param
     test_pypi = args.test
     pypi_token = args.token
     if names and pypi_token:
-        PyPIUploader(pypi_token, test_pypi).batch_upload(names)
+        PyPIUploader(pypi_token, test_pypi).batch_upload(names, params)
     else:
         tprint("Reserver")
         tprint("V:" + RESERVER_VERSION)
