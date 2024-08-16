@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- CLI tests added
+- `param` arg in CLI Handler
 - more testcases in conflict cases
 - `batch_upload` tests
 - `read_json` method in `util.py`
