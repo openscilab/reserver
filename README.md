@@ -91,7 +91,40 @@ reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN --test
 ```console
 reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN
 ```
+You can customize package parameters (listed below) by passing considered params as JSON file to reserver.
 
+Customizable package parameters are: (default value is written in front of them)
+- description: `This name has been reserved using Reserver`
+- author: `Development Team`
+- author: `test@test.com`
+- url: `https://url.com`
+- download url: `https://download_url.com`
+- source: `https://github.com/source`
+- license: `MIT`
+
+#### Reserve in test PyPI (test.pypi.org) with custom parameters (all names have same parameters)
+Let's assume we want our package parameters to be as below:
+```json
+// config.json
+{
+    "description": "PyPI package name reserver",
+    "author": "Reserver Development Team",
+    "author_email": "reserver@openscilab.com",
+    "url": "https://github.com/openscilab/reserver",
+    "download_url": "https://github.com/openscilab/reserver/tarball/v0.2",
+    "source": "https://github.com/source",
+    "license": "MIT"
+}
+```
+Then we should pass `config.json` to the `--param` field of Reserver's CLI in order to get things done. 
+```console
+reserver --name sample_name1 sample_name2 --param config.json --token=PYPI_TOKEN --test
+```
+#### Reserve in main PyPI (pypi.org) with custom parameters (each name has different parameters)
+Similarily, there should be per file, a dedicated JSON file containing associted parameters and then we need to pass them all to `--param` field of Reserver's CLI.
+```console
+reserver --name sample_name1 sample_name2 --param name1_param.json name2_param.json --token=PYPI_TOKEN --test
+```
 ## Issues & bug reports
 
 Just fill an issue and describe it. We'll check it ASAP! or send an email to [reserver@openscilab.com](mailto:reserver@openscilab.com "reserver@openscilab.com"). 
