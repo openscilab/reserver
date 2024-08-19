@@ -71,10 +71,16 @@ Reserver is an open source Python package that offers the ability to quickly
 ## Usage
 
 ### Programmatically 
+Reserve a package name in main PyPI (pypi.org)
 ```python
 from reserver import PyPIUploader
-uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi= False)
+uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi=False)
 uploader.upload("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
+```
+Reserve batch of names with custom user-defined parameters in test PyPI (test.pypi.org)
+```python
+uploader = PyPIUploader(test_pypi_token, test_pypi=True)
+uploader.batch_upload(["PACKAGE_NAME_1", "PACKAGE_NAME_2"], ["config1.json", "config2.json"])
 ```
 ### CLI
 ⚠️ You can use `reserver` or `python -m reserver` to run this program
@@ -91,7 +97,7 @@ reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN --test
 ```console
 reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN
 ```
-You can customize package parameters (listed below) by passing considered params as JSON file to reserver.
+You can customize package parameters (listed below) by passing considered params as JSON file(s).
 
 Customizable package parameters are: (default value is written in front of them)
 - description: `This name has been reserved using Reserver`
