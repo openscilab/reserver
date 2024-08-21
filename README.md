@@ -74,12 +74,12 @@ Reserver is an open source Python package that offers the ability to quickly
 Reserve a package name in main PyPI (pypi.org)
 ```python
 from reserver import PyPIUploader
-uploader = PyPIUploader(PYPI_API_TOKEN, test_pypi=False)
+uploader = PyPIUploader(PYPI_TOKEN, test_pypi=False)
 uploader.upload("CONSIDERED_NAME_FOR_YOUR_PACKAGE")
 ```
 Reserve batch of names with custom user-defined parameters in test PyPI (test.pypi.org)
 ```python
-uploader = PyPIUploader(test_pypi_token, test_pypi=True)
+uploader = PyPIUploader(TEST_PYPI_TOKEN, test_pypi=True)
 uploader.batch_upload(["PACKAGE_NAME_1", "PACKAGE_NAME_2"], ["config1.json", "config2.json"])
 ```
 ### CLI
@@ -91,7 +91,7 @@ reserver --version
 ```
 #### Reserve in test PyPI (test.pypi.org)
 ```console
-reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN --test
+reserver --name sample_name1 sample_name2 --token=TEST_PYPI_TOKEN --test
 ```
 #### Reserve in main PyPI (pypi.org)
 ```console
@@ -163,6 +163,7 @@ Similarily, there should be per file, a dedicated JSON file containing associted
 ```console
 reserver --name sample_name1 sample_name2 --param name1_param.json name2_param.json --token=PYPI_TOKEN
 ```
+⚠️ You can use all available features on both `pypi.org` and `test.pypi.org`.
 ## Issues & bug reports
 
 Just fill an issue and describe it. We'll check it ASAP! or send an email to [reserver@openscilab.com](mailto:reserver@openscilab.com "reserver@openscilab.com"). 
