@@ -99,19 +99,51 @@ reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN
 ```
 You can customize package parameters (listed below) by passing considered params as JSON file(s).
 
-Customizable package parameters are: (default value is written in front of them)
-- description: `This name has been reserved using Reserver`
-- author: `Development Team`
-- author: `test@test.com`
-- url: `https://url.com`
-- download url: `https://download_url.com`
-- source: `https://github.com/source`
-- license: `MIT`
+<table>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+<td><code>description</code></td>
+<td>string</td>
+<td><code>This name has been reserved using Reserver</code></td>
+</tr>
+<td><code>author</code></td>
+<td>string</td>
+<td><code>Development Team</code></td>
+</tr>
 
-#### Reserve in test PyPI (test.pypi.org) with custom parameters (all names have same parameters)
+<td><code>author_email</code></td>
+<td>email address</td>
+<td><code>test@test.com</code></td>
+</tr>
+
+<td><code>url</code></td>
+<td>web address</td>
+<td><code>https://url.com</code></td>
+</tr>
+
+<td><code>download_url</code></td>
+<td>web address</td>
+<td><code>https://download_url.com</code></td>
+</tr>
+
+<td><code>source</code></td>
+<td>web address</td>
+<td><code>https://github.com/source</code></td>
+</tr>
+
+<td><code>license</code></td>
+<td>string</td>
+<td><code>MIT</code></td>
+</tr>
+
+</table>
+
+#### Custom parameters (one `param.json` for all packages)
 Let's assume we want our package parameters to be as below:
 ```json
-// config.json
 {
     "description": "PyPI package name reserver",
     "author": "Reserver Development Team",
@@ -124,12 +156,12 @@ Let's assume we want our package parameters to be as below:
 ```
 Then we should pass `config.json` to the `--param` field of Reserver's CLI in order to get things done. 
 ```console
-reserver --name sample_name1 sample_name2 --param config.json --token=PYPI_TOKEN --test
+reserver --name sample_name1 sample_name2 --param config.json --token=PYPI_TOKEN
 ```
-#### Reserve in main PyPI (pypi.org) with custom parameters (each name has different parameters)
+#### Custom parameters (one `param.json` per package)
 Similarily, there should be per file, a dedicated JSON file containing associted parameters and then we need to pass them all to `--param` field of Reserver's CLI.
 ```console
-reserver --name sample_name1 sample_name2 --param name1_param.json name2_param.json --token=PYPI_TOKEN --test
+reserver --name sample_name1 sample_name2 --param name1_param.json name2_param.json --token=PYPI_TOKEN
 ```
 ## Issues & bug reports
 
