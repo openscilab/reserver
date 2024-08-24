@@ -97,72 +97,43 @@ reserver --name sample_name1 sample_name2 --token=TEST_PYPI_TOKEN --test
 ```console
 reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN
 ```
-You can customize package parameters (listed below) by passing considered params as JSON file(s).
+#### Customizing Package Parameters
 
-<table>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-</tr>
-<td><code>description</code></td>
-<td>string</td>
-<td><code>This name has been reserved using Reserver</code></td>
-</tr>
-<td><code>author</code></td>
-<td>string</td>
-<td><code>Development Team</code></td>
-</tr>
+You can customize the following package parameters for reservations on PyPI using the Reserver CLI. The details and defaults are provided in the table below.
 
-<td><code>author_email</code></td>
-<td>email address</td>
-<td><code>test@test.com</code></td>
-</tr>
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `description` | string | `This name has been reserved using Reserver` | A short description of your PyPI package name reservation. |
+| `author` | string | `Development Team` | The name of the author or development team. |
+| `author_email` | email address | `test@test.com` | An email address for contact. |
+| `url` | web address | `https://url.com` | The project's main repository URL. |
+| `download_url` | web address | `https://download_url.com` | The download URL for the package. |
+| `source` | web address | `https://github.com/source` | The source code repository URL. |
+| `license` | string | `MIT` | The license under which your package is distributed. |
 
-<td><code>url</code></td>
-<td>web address</td>
-<td><code>https://url.com</code></td>
-</tr>
+There are two ways to define these custom parameters:
 
-<td><code>download_url</code></td>
-<td>web address</td>
-<td><code>https://download_url.com</code></td>
-</tr>
+**1. Single `param.json` for All Packages:**
 
-<td><code>source</code></td>
-<td>web address</td>
-<td><code>https://github.com/source</code></td>
-</tr>
+This approach uses a single JSON file (`param.json`) to define common parameters for all packages. This file could hold information like those described in the table.
 
-<td><code>license</code></td>
-<td>string</td>
-<td><code>MIT</code></td>
-</tr>
+Here's how to use this method:
 
-</table>
-
-#### Custom parameters (one `param.json` for all packages)
-Let's assume we want our package parameters to be as below:
-```json
-{
-    "description": "PyPI package name reserver",
-    "author": "Reserver Development Team",
-    "author_email": "reserver@openscilab.com",
-    "url": "https://github.com/openscilab/reserver",
-    "download_url": "https://github.com/openscilab/reserver/tarball/v0.2",
-    "source": "https://github.com/source",
-    "license": "MIT"
-}
-```
-Then we should pass `config.json` to the `--param` field of Reserver's CLI in order to get things done. 
 ```console
 reserver --name sample_name1 sample_name2 --param config.json --token=PYPI_TOKEN
 ```
-#### Custom parameters (one `param.json` per package)
-Similarily, there should be per file, a dedicated JSON file containing associted parameters and then we need to pass them all to `--param` field of Reserver's CLI.
+**2. Dedicated `param.json` per Package:**
+
+This approach allows for more customization by having a separate JSON file for each package. Each file would contain parameters specific to that particular package.
+
+Here's how this method works:
+
 ```console
 reserver --name sample_name1 sample_name2 --param name1_param.json name2_param.json --token=PYPI_TOKEN
 ```
+
+Choose the method that best suits your needs. Using a single `param.json` is efficient for packages with similar information, while separate files offer more granular control.
+
 ⚠️ You can use all available features on both `pypi.org` and `test.pypi.org`.
 ## Issues & bug reports
 
