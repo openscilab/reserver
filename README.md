@@ -97,7 +97,7 @@ reserver --name sample_name1 sample_name2 --token=TEST_PYPI_TOKEN --test
 ```console
 reserver --name sample_name1 sample_name2 --token=PYPI_TOKEN
 ```
-#### Customizing Package Parameters
+#### Customizing package parameters
 
 You can customize the following package parameters for reservations on PyPI using the Reserver CLI. The details and defaults are provided in the table below.
 
@@ -113,7 +113,7 @@ You can customize the following package parameters for reservations on PyPI usin
 
 There are two ways to define these custom parameters:
 
-**1. Single `param.json` for All Packages:**
+**1. Single `param.json` for all packages:**
 
 This approach uses a single JSON file (`param.json`) to define common parameters for all packages. This file could hold information like those described in the table.
 
@@ -122,7 +122,7 @@ Here's how to use this method:
 ```console
 reserver --name sample_name1 sample_name2 --param config.json --token=PYPI_TOKEN
 ```
-**2. Dedicated `param.json` per Package:**
+**2. Dedicated `param.json` per package:**
 
 This approach allows for more customization by having a separate JSON file for each package. Each file would contain parameters specific to that particular package.
 
