@@ -10,6 +10,7 @@ from .reserver_param import UNEQUAL_PARAM_NAME_LENGTH_ERROR
 from .util import has_named_parameter, remove_dir, read_json
 from .reserver_func import does_package_exist, generate_template_setup_py
 
+
 class PyPIUploader:
     """
     The Reserver PyPIUploader class reserves a package name by uploading a template repo to pypi account.
@@ -43,7 +44,7 @@ class PyPIUploader:
         :return: Number of successfully reserved packages
         """
         reserved_successfully = 0
-        if user_params_path == None:
+        if user_params_path is None:
             for name in names:
                 if self.upload(name):
                     reserved_successfully += 1
@@ -78,9 +79,9 @@ class PyPIUploader:
             print("This package already exists in PyPI.")
             return False
 
-        if user_parameters != None:
+        if user_parameters is not None:
             user_parameters = read_json(user_parameters)
-        
+
         generate_template_setup_py(package_name, user_parameters)
 
         environ["TWINE_USERNAME"] = self.username
@@ -97,17 +98,16 @@ class PyPIUploader:
         # prevent from uploading any other previously build library in this path.
         if path.exists(generated_dist_folder):
             remove_dir(generated_dist_folder)
-
-        commands = [executable + " " + generated_setup_file_path + " sdist bdist_wheel "]
+        commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel']
         if self.test_pypi:
             commands += [
-                executable + " -m twine upload --repository testpypi " + generated_tar_gz_file,
-                executable + " -m twine upload --repository testpypi " + generated_wheel_file,
+                f'"{executable}" -m twine upload --repository testpypi "{generated_tar_gz_file}"',
+                f'"{executable}" -m twine upload --repository testpypi "{generated_wheel_file}"',
             ]
         else:
             commands += [
-                executable + " -m twine upload --verbose " + generated_tar_gz_file,
-                executable + " -m twine upload --verbose " + generated_wheel_file,
+                f'"{executable}" -m twine upload --verbose "{generated_tar_gz_file}"',
+                f'"{executable}" -m twine upload --verbose "{generated_wheel_file}"',
             ]
         # Run the commands
         publish_failed = False
@@ -123,7 +123,7 @@ class PyPIUploader:
                 error = e.output
                 try:
                     error = error.decode(chardet.detect(error)['encoding'])
-                except:
+                except BaseException:
                     error = error.decode('utf-8')
                 if command == commands[-2]:
                     if "403" in error and "Invalid or non-existent authentication information" in error:
