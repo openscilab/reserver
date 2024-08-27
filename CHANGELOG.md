@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+### Changed
+## [0.3] - 2024-08-26
+### Added
 - CLI tests added
 - `param` arg in CLI Handler
 - more testcases in conflict cases
@@ -42,6 +45,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Handle similar name existence in PyPI
 - Handle issue with "-" character `.egginfo` file name
 
-[Unreleased]: https://github.com/openscilab/reserver/compare/v0.2...dev
+[Unreleased]: https://github.com/openscilab/reserver/compare/v0.3...dev
+[0.3]: https://github.com/openscilab/reserver/compare/v0.2...v0.3
 [0.2]: https://github.com/openscilab/reserver/compare/v0.1...v0.2
 [0.1]: https://github.com/openscilab/reserver/compare/0ae5bb9...v0.1
