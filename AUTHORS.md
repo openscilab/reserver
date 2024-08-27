@@ -8,3 +8,4 @@
 
 # Other Contributors
 ----------
+- Amir Boreshnavard ([Telegram](https://t.me/ABoreshnavard))
