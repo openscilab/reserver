@@ -63,9 +63,9 @@ Reserver is an open source Python package that offers the ability to quickly
 ### PyPI
 
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)
-- Run `pip install reserver==0.2`
+- Run `pip install reserver==0.3`
 ### Source code
-- Download [Version 0.2](https://github.com/openscilab/reserver/archive/v0.2.zip) or [Latest Source](https://github.com/openscilab/reserver/archive/dev.zip)
+- Download [Version 0.3](https://github.com/openscilab/reserver/archive/v0.3.zip) or [Latest Source](https://github.com/openscilab/reserver/archive/dev.zip)
 - Run `pip install .`
 
 ## Usage
@@ -144,12 +144,6 @@ Just fill an issue and describe it. We'll check it ASAP! or send an email to [re
 You can also join our discord server
 
 <a href="https://discord.gg/RD2y6SGuY3"><img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel"></a>
-
-## References
-
-1. <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Good Ware - Flaticon</a>
-2. <a href="https://www.flaticon.com/free-icons/reserved" title="reserved icons">Reserved icons created by Freepik - Flaticon</a>
-
 
 ## Show your support
 
