@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
 ## [0.3] - 2024-08-28
 ### Added
