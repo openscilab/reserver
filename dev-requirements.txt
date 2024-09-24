@@ -1,4 +1,4 @@
-art==6.2
+art==6.3
 requests==2.32.3
 setuptools==75.0.0
 wheel==0.44.0
