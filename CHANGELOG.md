@@ -9,8 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
 - `Python 3.13` added to `test.yml`
-- `Python 3.13` added to `bug_report.yml`
-- `Python 3.13` added to `setup.py`
 ## [0.3] - 2024-08-28
 ### Added
 - CLI tests added
