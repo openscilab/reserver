@@ -102,9 +102,7 @@ setup(
     packages=[""" + "\"" + package_name + "\"" + "," + """],
     version='0.0.0',
     description=""" + "\"" + get_package_parameter("description", user_parameters) + "\"" + """,
-    long_description=\"\"\"
-    This name has been reserved using [Reserver](https://github.com/openscilab/reserver).
-    \"\"\",
+    long_description= \"This name has been reserved using [Reserver](https://github.com/openscilab/reserver).\",
     long_description_content_type='text/markdown',
     author=""" + "\"" + get_package_parameter("author", user_parameters) + "\"" + """,
     author_email=""" + "\"" + get_package_parameter("author_email", user_parameters, "email") + "\"" + """,
