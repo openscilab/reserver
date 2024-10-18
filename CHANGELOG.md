@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
+- `generate_template_setup_py` method in `reserver_func.py`
 - `Python 3.13` added to `test.yml`
 ## [0.3] - 2024-08-28
 ### Added
