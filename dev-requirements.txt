@@ -1,6 +1,6 @@
-art==6.3
+art==6.4
 requests==2.32.3
-setuptools==75.5.0
+setuptools==75.6.0
 wheel==0.45.1
 twine==5.1.1
 vulture>=1.0
