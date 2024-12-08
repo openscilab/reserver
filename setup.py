@@ -37,7 +37,7 @@ setup(
     author_email='reserver@openscilab.com',
     url='https://github.com/openscilab/reserver',
     download_url='https://github.com/openscilab/reserver/tarball/v0.3',
-    keywords="python3 python PyPI pip package name reservation",
+    keywords="pypi pip package name reserve reserver reservation python",
     project_urls={
             'Source': 'https://github.com/openscilab/reserver',
     },

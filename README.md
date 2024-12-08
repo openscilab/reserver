@@ -3,8 +3,9 @@
     <br/>
     <br/>
     <a href="https://codecov.io/gh/openscilab/reserver"><img src="https://codecov.io/gh/openscilab/reserver/branch/main/graph/badge.svg" alt="Codecov"/></a>
-    <a href="https://badge.fury.io/py/reserver"><img src="https://badge.fury.io/py/reserver.svg" alt="PyPI version" height="18"></a>
+    <a href="https://badge.fury.io/py/reserver"><img src="https://badge.fury.io/py/reserver.svg" alt="PyPI version"></a>
     <a href="https://www.python.org/"><img src="https://img.shields.io/badge/built%20with-Python3-green.svg" alt="built with Python3"></a>
+    <a href="https://github.com/openscilab/reserver"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/openscilab/reserver"></a>
     <a href="https://discord.gg/RD2y6SGuY3"><img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel"></a>
 </div>
 
@@ -83,7 +84,7 @@ uploader = PyPIUploader(TEST_PYPI_TOKEN, test_pypi=True)
 uploader.batch_upload(["PACKAGE_NAME_1", "PACKAGE_NAME_2"], ["config1.json", "config2.json"])
 ```
 ### CLI
-⚠️ You can use `reserver` or `python -m reserver` to run this program
+ℹ️ You can use `reserver` or `python -m reserver` to run this program
 #### Version
 ```console
 reserver -v
@@ -134,7 +135,7 @@ reserver --name sample_name1 sample_name2 --param name1_param.json name2_param.j
 
 Choose the method that best suits your needs. Using a single `param.json` is efficient for packages with similar information, while separate files offer more granular control.
 
-⚠️ You can use all available features on both `pypi.org` and `test.pypi.org`.
+ℹ️ You can use all available features on both `pypi.org` and `test.pypi.org`.
 ## Issues & bug reports
 
 Just fill an issue and describe it. We'll check it ASAP! or send an email to [reserver@openscilab.com](mailto:reserver@openscilab.com "reserver@openscilab.com"). 
