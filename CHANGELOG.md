@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
 - `README.md` updated
+- `AUTHORS.md` updated
 - GitHub actions are limited to the `dev` and `main` branches
 - `generate_template_setup_py` method in `reserver_func.py`
 - `Python 3.13` added to `test.yml`
