@@ -120,19 +120,6 @@ class PyPIUploader:
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
-                try:
-                    error = error.decode(chardet.detect(error)['encoding'])
-                except BaseException:
-                    error = error.decode('utf-8')
-                if command == commands[-2]:
-                    if "403" in error and "Invalid or non-existent authentication information" in error:
-                        error = "Invalid or non-existent authentication information(PyPI API Key)."
-                    if "400" in error and "too similar to an existing project" in error:
-                        error = "Given package name is too similar to an existing project in PyPI."
-                    if "400" in error and "isn't allowed." in error:
-                        error = "Given package name has conflict with the module name of a previously taken package."
-                    if "400" in error and "isn't allowed (conflict with Python Standard Library" in error:
-                        error = "Given package name has conflict with Python Standard Library module name."
                 break
 
         if "TWINE_USERNAME" in environ:
