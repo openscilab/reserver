@@ -9,3 +9,5 @@ updates:
   target-branch: dev
   assignees:
       - "AHReccese"
+  reviewers:
+      - "AHReccese"
