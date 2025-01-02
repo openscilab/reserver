@@ -122,11 +122,12 @@ class PyPIUploader:
                 error = e.output
                 break
 
+        # remove credential from env variables
         if "TWINE_USERNAME" in environ:
             environ.pop("TWINE_USERNAME")
         if "TWINE_PASSWORD" in environ:
             environ.pop("TWINE_PASSWORD")
-
+        # remove previously generated files
         remove(generated_setup_file_path)
         remove_dir(generated_package_folder)
         remove_dir(generated_egginfo_file_path)
