@@ -105,8 +105,8 @@ class PyPIUploader:
             ]
         else:
             commands += [
-                f'"{executable}" -m twine upload --verbose "{generated_tar_gz_file}"',
-                f'"{executable}" -m twine upload --verbose "{generated_wheel_file}"',
+                f'"{executable}" -m twine upload "{generated_tar_gz_file}"',
+                f'"{executable}" -m twine upload "{generated_wheel_file}"',
             ]
         # Run the commands
         publish_failed = False
