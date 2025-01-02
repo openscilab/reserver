@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- default reviewer added in `dependabot.yml`
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
 - `README.md` updated
