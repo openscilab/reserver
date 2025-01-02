@@ -94,7 +94,10 @@ class PyPIUploader:
         # prevent from uploading any other previously build library in this path.
         if path.exists(generated_dist_folder):
             remove_dir(generated_dist_folder)
-        commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel']
+        if platform.system() == "Windows":
+            commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel > nul 2>&1']
+        else:
+            commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel > /dev/null 2>&1']
         if self.test_pypi:
             commands += [
                 f'"{executable}" -m twine upload --repository testpypi "{generated_tar_gz_file}"',
