@@ -5,8 +5,6 @@ Reserver is an open source Python package that offers the ability to quickly res
 """
 RESERVER_VERSION = "0.3"
 RESERVER_NAME = "reserver"
-PYPI_TEST_URL = "https://test.pypi.org/project"
-PYPI_MAIN_URL = "https://pypi.org/project"
 PACKAGE_PARAMETERS = {
     "description": "This name has been reserved using Reserver",
     "author": "Development Team",
