@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """Reserver functions."""
 import re
-import requests
-import requests.adapters
-from .reserver_param import PYPI_TEST_URL, PYPI_MAIN_URL, PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
+from time import time
+from hashlib import sha256
+from os import mkdir, rmdir
+from .reserver_param import PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
 from .reserver_param import INVALID_PACKAGE_PARAMETER_NAME_ERROR, INVALID_PACKAGE_PARAMETER_VALUE_ERROR
 from .reserver_errors import ReserverBaseError
-from hashlib import sha256
-from time import time
-from os import mkdir, rmdir
 
 
 def get_random_name():
