@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
-import chardet
 import platform
 from re import sub
 from sys import executable
