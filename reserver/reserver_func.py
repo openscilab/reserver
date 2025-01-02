@@ -20,37 +20,6 @@ def get_random_name():
     return sha256(str(time()).encode("utf-8")).hexdigest()
 
 
-def does_package_exist(suggested_name, test_pypi):
-    """
-    Check whether a package with the given name exists or not.
-
-    :param suggested_name: given name to search in pypi(or test.pypi)
-    :type suggested_name: str
-    :param test_pypi: indicates to search in test.pypi or not
-    :type test_pypi: bool
-    :return: whether given name does exist in the pypi or not(as a boolean value)
-    """
-    if not isinstance(suggested_name, str):
-        suggested_name = str(suggested_name)
-    if test_pypi:
-        url = PYPI_TEST_URL + "/" + suggested_name + "/"
-    else:
-        url = PYPI_MAIN_URL + "/" + suggested_name + "/"
-
-    s = requests.Session()
-    retries = requests.adapters.Retry(
-        total=5,
-        backoff_factor=0.1,
-        status_forcelist=[500, 502, 503, 504]
-    )
-
-    s.mount('http://', requests.adapters.HTTPAdapter(max_retries=retries))
-    s.mount('https://', requests.adapters.HTTPAdapter(max_retries=retries))
-
-    response = s.get(url, timeout=5)
-    return not response.status_code == 404
-
-
 def get_package_parameter(parameter, user_parameters, regex=None):
     """
     Get the value for the associated package parameter.
