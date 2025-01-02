@@ -71,15 +71,11 @@ class PyPIUploader:
 
         :param package_name: package name
         :type package_name: str
-        :param user_parameters: path to the .json file containing user-defined package parameters
-        :type user_parameters: str
+        :param user_parameters: json file or path to the .json file containing user-defined package parameters
+        :type user_parameters: str | dict
         :return: True if the package is successfully reserved, False otherwise
         """
-        if does_package_exist(package_name, self.test_pypi):
-            print("This package already exists in PyPI.")
-            return False
-
-        if user_parameters is not None:
+        if not isinstance(user_parameters, dict) and user_parameters is not None:
             user_parameters = read_json(user_parameters)
 
         generate_template_setup_py(package_name, user_parameters)
