@@ -8,11 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
+- `upload` method in `reserver_obj.py`
 - `README.md` updated
 - `AUTHORS.md` updated
 - GitHub actions are limited to the `dev` and `main` branches
 - `generate_template_setup_py` method in `reserver_func.py`
 - `Python 3.13` added to `test.yml`
+### Removed
+- `does_package_exist` method in `reserver_func.py`
 ## [0.3] - 2024-08-28
 ### Added
 - CLI tests added
