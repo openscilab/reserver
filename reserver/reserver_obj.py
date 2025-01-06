@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
+import chardet
 import platform
 from re import sub
 from sys import executable
@@ -120,7 +121,10 @@ class PyPIUploader:
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
-                break
+                try:
+                    error = error.decode(chardet.detect(error)['encoding'])
+                except BaseException:
+                    error = error.decode('utf-8')
 
         # remove credential from env variables
         if "TWINE_USERNAME" in environ:
