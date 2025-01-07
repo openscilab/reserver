@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """Reserver modules."""
 import chardet
+import platform
 from re import sub
 from sys import executable
 from os import environ, path, getcwd, remove
 from .reserver_errors import ReserverBaseError
+from .reserver_func import generate_template_setup_py
 from subprocess import check_output, CalledProcessError
 from .reserver_param import UNEQUAL_PARAM_NAME_LENGTH_ERROR
 from .util import has_named_parameter, remove_dir, read_json
-from .reserver_func import does_package_exist, generate_template_setup_py
 
 
 class PyPIUploader:
@@ -71,15 +72,11 @@ class PyPIUploader:
 
         :param package_name: package name
         :type package_name: str
-        :param user_parameters: path to the .json file containing user-defined package parameters
-        :type user_parameters: str
+        :param user_parameters: json file or path to the .json file containing user-defined package parameters
+        :type user_parameters: str | dict
         :return: True if the package is successfully reserved, False otherwise
         """
-        if does_package_exist(package_name, self.test_pypi):
-            print("This package already exists in PyPI.")
-            return False
-
-        if user_parameters is not None:
+        if not isinstance(user_parameters, dict) and user_parameters is not None:
             user_parameters = read_json(user_parameters)
 
         generate_template_setup_py(package_name, user_parameters)
@@ -98,7 +95,10 @@ class PyPIUploader:
         # prevent from uploading any other previously build library in this path.
         if path.exists(generated_dist_folder):
             remove_dir(generated_dist_folder)
-        commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel']
+        if platform.system() == "Windows":
+            commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel > nul 2>&1']
+        else:
+            commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel > /dev/null 2>&1']
         if self.test_pypi:
             commands += [
                 f'"{executable}" -m twine upload --repository testpypi "{generated_tar_gz_file}"',
@@ -106,8 +106,8 @@ class PyPIUploader:
             ]
         else:
             commands += [
-                f'"{executable}" -m twine upload --verbose "{generated_tar_gz_file}"',
-                f'"{executable}" -m twine upload --verbose "{generated_wheel_file}"',
+                f'"{executable}" -m twine upload "{generated_tar_gz_file}"',
+                f'"{executable}" -m twine upload "{generated_wheel_file}"',
             ]
         # Run the commands
         publish_failed = False
@@ -125,22 +125,13 @@ class PyPIUploader:
                     error = error.decode(chardet.detect(error)['encoding'])
                 except BaseException:
                     error = error.decode('utf-8')
-                if command == commands[-2]:
-                    if "403" in error and "Invalid or non-existent authentication information" in error:
-                        error = "Invalid or non-existent authentication information(PyPI API Key)."
-                    if "400" in error and "too similar to an existing project" in error:
-                        error = "Given package name is too similar to an existing project in PyPI."
-                    if "400" in error and "isn't allowed." in error:
-                        error = "Given package name has conflict with the module name of a previously taken package."
-                    if "400" in error and "isn't allowed (conflict with Python Standard Library" in error:
-                        error = "Given package name has conflict with Python Standard Library module name."
-                break
 
+        # remove credential from env variables
         if "TWINE_USERNAME" in environ:
             environ.pop("TWINE_USERNAME")
         if "TWINE_PASSWORD" in environ:
             environ.pop("TWINE_PASSWORD")
-
+        # remove previously generated files
         remove(generated_setup_file_path)
         remove_dir(generated_package_folder)
         remove_dir(generated_egginfo_file_path)

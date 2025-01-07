@@ -9,18 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - default reviewer added in `dependabot.yml`
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
+- `upload` method in `reserver_obj.py`
 - `README.md` updated
 - `AUTHORS.md` updated
 - GitHub actions are limited to the `dev` and `main` branches
-- `generate_template_setup_py` method in `reserver_func.py`
+- `generate_template_setup_py` function in `reserver_func.py`
 - `Python 3.13` added to `test.yml`
+### Removed
+- `does_package_exist` function in `reserver_func.py`
 ## [0.3] - 2024-08-28
 ### Added
 - CLI tests added
 - `param` arg in CLI Handler
 - more testcases in conflict cases
 - `batch_upload` tests
-- `read_json` method in `util.py`
+- `read_json` function in `util.py`
 ### Changed
 - `README.md` updated
 - `upload` method in `reserver_obj.py`
@@ -29,14 +32,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - `CLI` handler
 - `Python 3.6` support
-- `has_named_parameter` method in `util.py`
+- `has_named_parameter` function in `util.py`
 - `feature_request.yml` template
 - `config.yml` for issue template
 - `batch_upload` method in `PyPIUploader`
 - `SECURITY.md`
 ### Changed
 - `upload` method in `reserver_obj.py`
-- `does_package_exist` method in `reserver_func.py`
+- `does_package_exist` function in `reserver_func.py`
 - `test.yml` for `Python 3.6` support
 - Logo updated
 - Bug report template modified
