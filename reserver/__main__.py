@@ -2,9 +2,9 @@
 """Reserver main."""
 import argparse
 from art import tprint
-from .reserver_param import RESERVER_VERSION
-from .reserver_func import reserver_help
-from .reserver_obj import PyPIUploader
+from .params import RESERVER_VERSION
+from .functions import reserver_help
+from .uploader import PyPIUploader
 
 
 def main():

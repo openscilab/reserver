@@ -5,11 +5,11 @@ import platform
 from re import sub
 from sys import executable
 from os import environ, path, getcwd, remove
-from .reserver_errors import ReserverBaseError
-from .reserver_func import generate_template_setup_py
+from .errors import ReserverBaseError
+from .functions import generate_template_setup_py
 from subprocess import check_output, CalledProcessError
-from .reserver_param import UNEQUAL_PARAM_NAME_LENGTH_ERROR
-from .util import has_named_parameter, remove_dir, read_json
+from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR
+from .utils import has_named_parameter, remove_dir, read_json
 
 
 class PyPIUploader:

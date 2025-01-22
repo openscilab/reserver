@@ -4,8 +4,8 @@ import os
 import json
 import shutil
 from inspect import signature
-from .reserver_errors import ReserverBaseError
-from .reserver_param import INVALID_CONFIG_FILE_NAME_ERROR, PARAM_FILE_DOES_NOT_EXIST_ERROR
+from .errors import ReserverBaseError
+from .params import INVALID_CONFIG_FILE_NAME_ERROR, PARAM_FILE_DOES_NOT_EXIST_ERROR
 
 
 def has_named_parameter(func, param_name):
