@@ -1,6 +1,6 @@
 import os
 from reserver import PyPIUploader
-from reserver.reserver_func import get_random_name
+from reserver.functions import get_random_name
 
 pypi_token = os.environ.get("TWINE_PASSWORD")
 test_pypi_token = os.environ.get("TWINE_TEST_PASSWORD")
