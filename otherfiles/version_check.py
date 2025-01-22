@@ -28,7 +28,7 @@ FILES = {
     "README.md": README_ITEMS,
     "CHANGELOG.md": CHANGELOG_ITEMS,
     "SECURITY.md": SECURITY_ITEMS,
-    os.path.join("reserver", "reserver_param.py"): PARAMS_ITEMS,
+    os.path.join("reserver", "params.py"): PARAMS_ITEMS,
     os.path.join(".github", "ISSUE_TEMPLATE", "bug_report.yml"): ISSUE_TEMPLATE_ITEMS
 }
 

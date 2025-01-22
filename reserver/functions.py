@@ -4,9 +4,9 @@ import re
 from time import time
 from hashlib import sha256
 from os import mkdir, rmdir
-from .reserver_param import PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
-from .reserver_param import INVALID_PACKAGE_PARAMETER_NAME_ERROR, INVALID_PACKAGE_PARAMETER_VALUE_ERROR
-from .reserver_errors import ReserverBaseError
+from .params import PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
+from .params import INVALID_PACKAGE_PARAMETER_NAME_ERROR, INVALID_PACKAGE_PARAMETER_VALUE_ERROR
+from .errors import ReserverBaseError
 
 
 def get_random_name():
