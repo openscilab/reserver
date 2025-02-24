@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `generate_template_pyproject_toml` in `functions.py`
 ### Changed
 - `upload` method in `uploader.py`
-### Removed
 - `generate_template_setup_py` in `functions.py`
 ## [0.4] - 2025-01-08
 ### Added
