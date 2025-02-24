@@ -5,7 +5,7 @@ import platform
 from sys import executable
 from os import environ, path, getcwd
 from .errors import ReserverBaseError
-from .functions import generate_template_pyproject_toml
+from .functions import generate_template_setup_py
 from subprocess import check_output, CalledProcessError
 from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR
 from .utils import has_named_parameter, remove_dir, read_json
@@ -87,8 +87,7 @@ class PyPIUploader:
         generated_wheel_file = path.join(generated_dist_folder, "*.whl")
         # prevent from uploading any other previously build library in this path.
         remove_dir(generated_dist_folder)
-
-        build_command = f'"{executable}" -m build --sdist --wheel "{package_path}"'
+        build_command = f'"{executable}" -m build "{package_path}" --sdist --wheel'
         if platform.system() == "Windows":
             commands = [f'{build_command} > nul 2>&1']
         else:
@@ -107,7 +106,7 @@ class PyPIUploader:
         publish_failed = False
         error = None
 
-        generate_template_pyproject_toml(package_name, user_parameters)
+        generate_template_setup_py(package_name, user_parameters)
 
         for command in commands:
             try:
