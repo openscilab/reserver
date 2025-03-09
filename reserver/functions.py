@@ -2,8 +2,8 @@
 """Reserver functions."""
 import re
 from time import time
+from pathlib import Path
 from hashlib import sha256
-from os import mkdir, rmdir
 from .params import PACKAGE_PARAMETERS, VALIDATIONS, OVERVIEW
 from .params import INVALID_PACKAGE_PARAMETER_NAME_ERROR, INVALID_PACKAGE_PARAMETER_VALUE_ERROR
 from .errors import ReserverBaseError
@@ -66,7 +66,7 @@ except ImportError:
 
 setup(
     name =""" + "\"" + package_name + "\"" + """,
-    packages=[""" + "\"" + package_name + "\"" + "," + """],
+    packages=[""" + "\".\"" + "," + """],
     version='0.0.0',
     description=""" + "\"" + get_package_parameter("description", user_parameters) + "\"" + """,
     long_description= \"This name has been reserved using [Reserver](https://github.com/openscilab/reserver).\",
@@ -95,17 +95,68 @@ setup(
 )
 
 """
-    with open(package_name + "_setup.py", "w+") as f:
+    package_path = Path(package_name)
+    package_path.mkdir(parents=True, exist_ok=True)
+
+    with open(package_path / "setup.py", "w+", encoding="utf-8") as f:
         f.writelines(setup_py_content)
 
-    try:
-        mkdir(package_name)
-    except FileExistsError:
-        rmdir(package_name)
-        mkdir(package_name)
-    with open(package_name + "/__init__.py", "w") as f:
+    with open(package_path / "__init__.py", "w+", encoding="utf-8") as f:
         f.write("# -*- coding: utf-8 -*-\n")
         f.write("\"\"\"" + package_name + " modules." + "\"\"\"")
+
+
+def generate_template_pyproject_toml(package_name, user_parameters):
+    """
+    Generate a template `pyproject.toml` file for given package name.
+
+    :param package_name: given name to generate template `pyproject.toml` for it.
+    :type package_name: str
+    :return: None
+    """
+    pyproject_toml_content = """
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = """ + "\"" + package_name + "\"" + """
+version = "0.0.0"
+description = """ + "\"" + get_package_parameter("description", user_parameters) + "\"" + """
+readme = { text = "This name has been reserved using [Reserver](https://github.com/openscilab/reserver).", content-type = "text/markdown" }
+authors = [
+    { name = """ + "\"" + get_package_parameter("author", user_parameters) + "\"" + """, email = """ + "\"" + get_package_parameter("author_email", user_parameters, "email") + "\"" + """ }
+]
+license = { text = """ + "\"" + get_package_parameter("license", user_parameters) + "\"" + """ }
+keywords = ["python3", "python", "reserve", "reserver", "reserved"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = []  # Explicitly specify no dependencies
+requires-python = ">=3.6"
+
+[project.urls]
+Homepage = """ + "\"" + get_package_parameter("url", user_parameters, "url") + "\"" + """
+Download = """ + "\"" + get_package_parameter("download_url", user_parameters, "url") + "\"" + """
+Source = """ + "\"" + get_package_parameter("source", user_parameters, "url") + "\"" + """
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [""" + "\"" + package_name + "\"" + """]
+
+"""
+    package_path = Path(package_name)
+    package_path.mkdir(parents=True, exist_ok=True)
+
+    with open(package_path / "pyproject.toml", "w+", encoding="utf-8") as f:
+        f.writelines(pyproject_toml_content)
 
 
 def reserver_help():
