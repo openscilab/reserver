@@ -4,14 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [0.4] - 2025-01-08
+## [Unreleased]
+### Added
+### Changed
 ### Removed
 - Python 3.6 support
+## [0.4] - 2025-01-08
 ### Added
 - default reviewer added in `dependabot.yml`
 - `ReserverBaseError` added in `reserver/__init__.py`
 ### Changed
-- 
 - `upload` method in `reserver_obj.py`
 - `README.md` updated
 - `AUTHORS.md` updated
