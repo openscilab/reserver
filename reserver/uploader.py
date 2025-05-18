@@ -2,9 +2,8 @@
 """Reserver modules."""
 import chardet
 import platform
-from re import sub
 from sys import executable
-from os import environ, path, getcwd, remove
+from os import environ, path, getcwd
 from .errors import ReserverBaseError
 from .functions import generate_template_setup_py
 from subprocess import check_output, CalledProcessError
@@ -79,26 +78,20 @@ class PyPIUploader:
         if not isinstance(user_parameters, dict) and user_parameters is not None:
             user_parameters = read_json(user_parameters)
 
-        generate_template_setup_py(package_name, user_parameters)
-
         environ["TWINE_USERNAME"] = self.username
         environ["TWINE_PASSWORD"] = self.password
 
-        generated_setup_file_path = path.join(getcwd(), package_name + "_setup.py")
-        generated_package_folder = path.join(getcwd(), package_name)
-        package_name_replaced = sub('-', '_', package_name)
-        generated_egginfo_file_path = path.join(getcwd(), package_name_replaced + ".egg-info")
-        generated_built_folder = path.join(getcwd(), "build")
-        generated_dist_folder = path.join(getcwd(), "dist")
+        package_path = path.join(getcwd(), package_name)
+        generated_dist_folder = path.join(package_path, "dist")
         generated_tar_gz_file = path.join(generated_dist_folder, "*.tar.gz")
         generated_wheel_file = path.join(generated_dist_folder, "*.whl")
         # prevent from uploading any other previously build library in this path.
-        if path.exists(generated_dist_folder):
-            remove_dir(generated_dist_folder)
+        remove_dir(generated_dist_folder)
+        build_command = f'"{executable}" -m build "{package_path}" --sdist --wheel'
         if platform.system() == "Windows":
-            commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel > nul 2>&1']
+            commands = [f'{build_command} > nul 2>&1']
         else:
-            commands = [f'"{executable}" "{generated_setup_file_path}" sdist bdist_wheel > /dev/null 2>&1']
+            commands = [f'{build_command} > /dev/null 2>&1']
         if self.test_pypi:
             commands += [
                 f'"{executable}" -m twine upload --repository testpypi "{generated_tar_gz_file}"',
@@ -112,6 +105,9 @@ class PyPIUploader:
         # Run the commands
         publish_failed = False
         error = None
+
+        generate_template_setup_py(package_name, user_parameters)
+
         for command in commands:
             try:
                 if has_named_parameter(check_output, "text"):
@@ -132,11 +128,7 @@ class PyPIUploader:
         if "TWINE_PASSWORD" in environ:
             environ.pop("TWINE_PASSWORD")
         # remove previously generated files
-        remove(generated_setup_file_path)
-        remove_dir(generated_package_folder)
-        remove_dir(generated_egginfo_file_path)
-        remove_dir(generated_built_folder)
-        remove_dir(generated_dist_folder)
+        remove_dir(package_path)
 
         if publish_failed:
             print(f"Publish to PyPI failed because of: ", error)
