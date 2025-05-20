@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `upload` method in `uploader.py`
 - `generate_template_setup_py` in `functions.py`
 - package build command in `publish_pypi.yml`
+### Removed
+- Python 3.6 support
 ## [0.4] - 2025-01-08
 ### Added
 - default reviewer added in `dependabot.yml`
