@@ -6,8 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `warning` message regarding PyPI token revoke
 - `generate_template_pyproject_toml` in `functions.py`
 ### Changed
+- `batch_upload` method in `uploader.py`
 - `upload` method in `uploader.py`
 - `generate_template_setup_py` in `functions.py`
 - package build command in `publish_pypi.yml`
