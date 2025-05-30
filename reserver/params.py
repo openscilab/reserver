@@ -26,4 +26,5 @@ INVALID_INPUT_USER_PARAM = "Invalid input for user params."
 UNEQUAL_PARAM_NAME_LENGTH_ERROR = "You should pass either one single file path to be used for the package parameters \
 or per each package name, there should be a specific dedicated file path."
 
-REVOKE_TOKEN_MESSAGE = "Security Tip: Please consider revoking your PyPI token from https://pypi.org/manage/account/token if no longer needed."
+MAIN_PYPI_REVOKE_TOKEN_MESSAGE = "Security Tip: Please consider revoking your PyPI token from https://pypi.org/manage/account/token if no longer needed."
+TEST_PYPI_REVOKE_TOKEN_MESSAGE = "Security Tip: Please consider revoking your test PyPI token from https://test.pypi.org/manage/account/token if no longer needed."
