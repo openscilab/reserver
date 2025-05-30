@@ -65,8 +65,9 @@ class PyPIUploader:
             else:
                 raise ReserverBaseError(UNEQUAL_PARAM_NAME_LENGTH_ERROR)
 
-        if reserved_successfully > 0 and not self.test_pypi:
-            print(REVOKE_TOKEN_MESSAGE)
+        if reserved_successfully > 0:
+            message = TEST_PYPI_REVOKE_TOKEN_MESSAGE if self.test_pypi else MAIN_PYPI_REVOKE_TOKEN_MESSAGE
+            print(message)
 
         return reserved_successfully
 
