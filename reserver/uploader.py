@@ -7,7 +7,8 @@ from os import environ, path, getcwd
 from .errors import ReserverBaseError
 from .functions import generate_template_setup_py
 from subprocess import check_output, CalledProcessError
-from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR, REVOKE_TOKEN_MESSAGE
+from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR
+from .params import MAIN_PYPI_REVOKE_TOKEN_MESSAGE, TEST_PYPI_REVOKE_TOKEN_MESSAGE
 from .utils import has_named_parameter, remove_dir, read_json
 
 
@@ -141,6 +142,7 @@ class PyPIUploader:
             return False
         else:
             print("Congratulations! You have successfully reserved the PyPI package: ", package_name)
-            if show_warning and not self.test_pypi:
-                print(REVOKE_TOKEN_MESSAGE)
+            if show_warning:
+                message = TEST_PYPI_REVOKE_TOKEN_MESSAGE if self.test_pypi else MAIN_PYPI_REVOKE_TOKEN_MESSAGE
+                print(message)
             return True
