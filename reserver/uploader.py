@@ -8,6 +8,7 @@ from .errors import ReserverBaseError
 from .functions import generate_template_setup_py
 from subprocess import check_output, CalledProcessError
 from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR
+from .params import MAIN_PYPI_REVOKE_TOKEN_MESSAGE, TEST_PYPI_REVOKE_TOKEN_MESSAGE
 from .utils import has_named_parameter, remove_dir, read_json
 
 
@@ -46,26 +47,31 @@ class PyPIUploader:
         reserved_successfully = 0
         if user_params_path is None:
             for name in names:
-                if self.upload(name):
+                if self.upload(name, show_warning=False):
                     reserved_successfully += 1
         elif isinstance(user_params_path, str):
             for name in names:
-                if self.upload(name, user_parameters=user_params_path):
+                if self.upload(name, user_parameters=user_params_path, show_warning=False):
                     reserved_successfully += 1
         elif isinstance(user_params_path, list):
             if len(user_params_path) == 1:
                 for name in names:
-                    if self.upload(name, user_parameters=user_params_path[0]):
+                    if self.upload(name, user_parameters=user_params_path[0], show_warning=False):
                         reserved_successfully += 1
             elif len(user_params_path) == len(names):
                 for index, name in enumerate(names):
-                    if self.upload(name, user_parameters=user_params_path[index]):
+                    if self.upload(name, user_parameters=user_params_path[index], show_warning=False):
                         reserved_successfully += 1
             else:
                 raise ReserverBaseError(UNEQUAL_PARAM_NAME_LENGTH_ERROR)
+
+        if reserved_successfully > 0:
+            message = TEST_PYPI_REVOKE_TOKEN_MESSAGE if self.test_pypi else MAIN_PYPI_REVOKE_TOKEN_MESSAGE
+            print(message)
+
         return reserved_successfully
 
-    def upload(self, package_name, user_parameters=None):
+    def upload(self, package_name, user_parameters=None, show_warning=True):
         """
         Upload a template package to pypi or test_pypi.
 
@@ -73,6 +79,8 @@ class PyPIUploader:
         :type package_name: str
         :param user_parameters: json file or path to the .json file containing user-defined package parameters
         :type user_parameters: str | dict
+        :param show_warning: Whether to show the PyPI token security warning
+        :type show_warning: bool
         :return: True if the package is successfully reserved, False otherwise
         """
         if not isinstance(user_parameters, dict) and user_parameters is not None:
@@ -135,4 +143,7 @@ class PyPIUploader:
             return False
         else:
             print("Congratulations! You have successfully reserved the PyPI package: ", package_name)
+            if show_warning:
+                message = TEST_PYPI_REVOKE_TOKEN_MESSAGE if self.test_pypi else MAIN_PYPI_REVOKE_TOKEN_MESSAGE
+                print(message)
             return True
