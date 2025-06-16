@@ -2,7 +2,7 @@ art==6.5
 setuptools==80.9.0
 wheel==0.45.1
 twine==6.1.0
-build==1.2.2
+build==1.2.2.post1
 vulture>=1.0
 bandit>=1.5.1
 pydocstyle>=3.0.0

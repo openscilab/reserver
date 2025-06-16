@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.5] - 2025-06-16
 ### Added
+- Dummy `README.md` file for the template package
 - Warning message regarding PyPI token revoke
 - `generate_template_pyproject_toml` in `functions.py`
 ### Changed

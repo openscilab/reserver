@@ -51,6 +51,12 @@ def generate_template_setup_py(package_name, user_parameters):
     :type package_name: str
     :return: None
     """
+    readme_content = """
+## Overview
+""" + package_name + """ is a Python library for doing awesome things.
+This name has been reserved using [Reserver](https://github.com/openscilab/reserver).
+"""
+
     setup_py_content = """
 import sys
 
@@ -69,7 +75,7 @@ setup(
     packages=[""" + "\".\"" + "," + """],
     version='0.0.0',
     description=""" + "\"" + get_package_parameter("description", user_parameters) + "\"" + """,
-    long_description= \"This name has been reserved using [Reserver](https://github.com/openscilab/reserver).\",
+    long_description=""" + "\"" + readme_content + "\"" + """,
     long_description_content_type='text/markdown',
     author=""" + "\"" + get_package_parameter("author", user_parameters) + "\"" + """,
     author_email=""" + "\"" + get_package_parameter("author_email", user_parameters, "email") + "\"" + """,
@@ -95,11 +101,15 @@ setup(
 )
 
 """
+
     package_path = Path(package_name)
     package_path.mkdir(parents=True, exist_ok=True)
 
     with open(package_path / "setup.py", "w+", encoding="utf-8") as f:
         f.writelines(setup_py_content)
+
+    with open(package_path / "README.md", "w+", encoding="utf-8") as f:
+        f.writelines(readme_content)
 
     with open(package_path / "__init__.py", "w+", encoding="utf-8") as f:
         f.write("# -*- coding: utf-8 -*-\n")
