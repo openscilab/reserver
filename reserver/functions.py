@@ -75,7 +75,7 @@ setup(
     packages=[""" + "\".\"" + "," + """],
     version='0.0.0',
     description=""" + "\"" + get_package_parameter("description", user_parameters) + "\"" + """,
-    long_description=""" + "\"" + readme_content + "\"" + """,
+    long_description=""" + "\"\"\"" + readme_content + "\"\"\"" + """,
     long_description_content_type='text/markdown',
     author=""" + "\"" + get_package_parameter("author", user_parameters) + "\"" + """,
     author_email=""" + "\"" + get_package_parameter("author_email", user_parameters, "email") + "\"" + """,
