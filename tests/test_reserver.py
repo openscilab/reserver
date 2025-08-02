@@ -1,4 +1,5 @@
 import os
+import pytest
 from reserver import PyPIUploader
 from reserver.functions import get_random_name
 
@@ -20,11 +21,11 @@ def test_valid_package_invalid_credentials():
     uploader = PyPIUploader("pypi-wrong-api-token", test_pypi=True)
     assert uploader.upload(get_random_name()) == False
 
+@pytest.mark.end_to_end
 def test_valid_package_valid_credentials():
     # test not reserved name -> correct credentials
-    # uploader = PyPIUploader(test_pypi_token, test_pypi=True)
-    # assert uploader.upload(get_random_name()) == True
-    assert True == True
+    uploader = PyPIUploader(test_pypi_token, test_pypi=True)
+    assert uploader.upload(get_random_name()) == True
 
 def test_module_conflict():
     # try to reserve a name which conflicts with the module name of a previously taken package (the taken package itself has a different name, but it's module name has conflict)."
@@ -36,12 +37,12 @@ def test_batch_packages_names():
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
     assert uploader.batch_upload(["numpy", "scikit-learn"]) == 0
 
+@pytest.mark.end_to_end
 def test_batch_upload():
     # try to reserve two non taken package names with per package custom setup.py parameters
     # make sure you are in "tests" directory
-    # uploader = PyPIUploader(test_pypi_token, test_pypi=True)
-    # assert uploader.batch_upload(
-    #     [get_random_name(), get_random_name() + get_random_name()],
-    #     ["config.json", "config2.json"]
-    #     ) == 2
-    assert True == True
+    uploader = PyPIUploader(test_pypi_token, test_pypi=True)
+    assert uploader.batch_upload(
+        [get_random_name(), get_random_name() + get_random_name()],
+        ["config.json", "config2.json"]
+        ) == 2
