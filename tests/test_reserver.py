@@ -41,8 +41,9 @@ def test_batch_packages_names():
 def test_batch_upload():
     # try to reserve two non taken package names with per package custom setup.py parameters
     # make sure you are in "tests" directory
+    tests_dir = os.path.join(os.getcwd(), "tests")
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
     assert uploader.batch_upload(
         [get_random_name(), get_random_name() + get_random_name()],
-        ["config.json", "config2.json"]
+        [os.path.join(tests_dir, "config.json"), os.path.join(tests_dir,"config2.json")]
         ) == 2
