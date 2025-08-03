@@ -64,9 +64,9 @@ jobs:
           PYTHON_VERSION="${{ matrix.python-version }}"
           TEST_PYTHON_VERSION="${{ env.TEST_PYTHON_VERSION }}"
           if [[ "$OS" == "$TEST_OS" && "$PYTHON_VERSION" == "$TEST_PYTHON_VERSION" ]]; then
-            python -m pytest . --cov=ipspot --cov-report=term
+            python -m pytest . --cov=reserver --cov-report=term
           else
-            python -m pytest . --cov=ipspot --cov-report=term -m "not end_to_end"
+            python -m pytest . --cov=reserver --cov-report=term -m "not end_to_end"
           fi
         shell: bash
       - name: Upload coverage to Codecov
