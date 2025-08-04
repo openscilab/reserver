@@ -6,8 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- end-to-end tests for package reservation in `test.yml`
 ### Changed
 - `generate_template_setup_py` function in `functions.py`
+- test system modified
 ## [0.5] - 2025-06-18
 ### Added
 - Dummy `README.md` file for the template package
