@@ -4,7 +4,7 @@ import os
 import sys
 import codecs
 Failed = 0
-RESERVER_VERSION = "0.5"
+RESERVER_VERSION = "0.6"
 
 
 SETUP_ITEMS = [
