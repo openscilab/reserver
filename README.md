@@ -57,6 +57,13 @@ Reserver is an open source Python package that offers the ability to quickly
             </td>
     </tr>
 </table>
+<table>
+    <tr> 
+        <td align="center">Code Quality</td>
+        <td align="center"><a href="https://www.codefactor.io/repository/github/openscilab/reserver"><img src="https://www.codefactor.io/repository/github/openscilab/reserver/badge" alt="CodeFactor"></a></td>
+        <td align="center"><a href="https://app.codacy.com/gh/openscilab/reserver/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/db385a0c79cc4c948714edf55b6224da"></a></td>
+    </tr>
+</table>
 
 
 ## Installation
