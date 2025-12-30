@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - `README.md` updated
 - `Python 3.14` added to `test.yml`
+- Test system modified
 ## [0.6] - 2025-08-11
 ### Added
 - end-to-end tests for package reservation in `test.yml`
