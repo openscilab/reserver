@@ -1,5 +1,5 @@
 art==6.5
-setuptools==80.9.0
+setuptools==80.10.2
 wheel==0.45.1
 twine==6.2.0
 build==1.4.0
