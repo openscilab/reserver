@@ -6,13 +6,8 @@ from .params import RESERVER_VERSION
 from .functions import reserver_help
 from .uploader import PyPIUploader
 
-
-def main():
-    """
-    CLI main function.
-
-    :return: None
-    """
+def _parse_args():
+    """Parse arguments."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--name',
@@ -39,6 +34,16 @@ def main():
     parser.add_argument('--version', help="version", action='store_true', default=False)
     parser.add_argument('-v', help="version", action='store_true', default=False)
     args = parser.parse_known_args()[0]
+    return args
+
+
+def _run(args):
+    """
+    Run reserver CLI.
+
+    :param args: arguments
+    :type args: argparse.Namespace
+    """
     if args.version or args.v:
         print(RESERVER_VERSION)
         return
@@ -53,6 +58,17 @@ def main():
         tprint("V:" + RESERVER_VERSION)
         reserver_help()
         parser.print_help()
+
+
+def main():
+    """
+    CLI main function.
+
+    :return: None
+    """
+    args = _parse_args()
+    _run(args)
+    
 
 
 if __name__ == "__main__":
