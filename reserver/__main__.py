@@ -2,7 +2,7 @@
 """Reserver main."""
 import argparse
 from art import tprint
-from .params import RESERVER_VERSION
+from .params import RESERVER_VERSION, EXIT_MESSAGE
 from .functions import reserver_help
 from .uploader import PyPIUploader
 
@@ -66,8 +66,11 @@ def main():
 
     :return: None
     """
-    args = _parse_args()
-    _run(args)
+    try:
+        args = _parse_args()
+        _run(args)
+    except (KeyboardInterrupt, EOFError):
+        print(EXIT_MESSAGE)
     
 
 

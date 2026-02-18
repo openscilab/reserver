@@ -28,3 +28,5 @@ or per each package name, there should be a specific dedicated file path."
 
 MAIN_PYPI_REVOKE_TOKEN_MESSAGE = "Security Tip: Please consider revoking your PyPI token from https://pypi.org/manage/account/token if no longer needed."
 TEST_PYPI_REVOKE_TOKEN_MESSAGE = "Security Tip: Please consider revoking your test PyPI token from https://test.pypi.org/manage/account/token if no longer needed."
+
+EXIT_MESSAGE = "See you. Bye!"
