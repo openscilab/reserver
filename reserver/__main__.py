@@ -6,6 +6,7 @@ from .params import RESERVER_VERSION, EXIT_MESSAGE
 from .functions import reserver_help
 from .uploader import PyPIUploader
 
+
 def _parse_args():
     """Parse arguments."""
     parser = argparse.ArgumentParser()
@@ -71,7 +72,6 @@ def main():
         _run(args)
     except (KeyboardInterrupt, EOFError):
         print(EXIT_MESSAGE)
-
 
 
 if __name__ == "__main__":
