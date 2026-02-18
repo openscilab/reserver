@@ -71,7 +71,7 @@ def main():
         _run(args)
     except (KeyboardInterrupt, EOFError):
         print(EXIT_MESSAGE)
-    
+
 
 
 if __name__ == "__main__":
