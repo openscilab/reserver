@@ -33,10 +33,10 @@ Reserver is an open source Python package that offers the ability to quickly
         </td>
     </tr>
     <tr>
-        <td align="center">Github Stars</td>
+        <td align="center">GitHub Stars</td>
         <td align="center">
-            <a href="https://github.com/openscilab/reserver">
-                <img src="https://img.shields.io/github/stars/openscilab/reserver.svg?style=social&label=Stars">
+            <a href="https://github.com/openscilab/reserver/stargazers">
+                <img src="https://badgen.net/github/stars/openscilab/reserver" alt="GitHub Stars">
             </a>
         </td>
     </tr>
