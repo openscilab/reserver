@@ -6,7 +6,7 @@ from sys import executable
 from os import environ, path, getcwd
 from .errors import ReserverBaseError
 from .functions import generate_template_setup_py
-from subprocess import check_output, CalledProcessError
+from subprocess import check_output, CalledProcessError, STDOUT
 from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR
 from .params import MAIN_PYPI_REVOKE_TOKEN_MESSAGE, TEST_PYPI_REVOKE_TOKEN_MESSAGE
 from .utils import has_named_parameter, remove_dir, read_json
@@ -119,16 +119,24 @@ class PyPIUploader:
         for command in commands:
             try:
                 if has_named_parameter(check_output, "text"):
-                    check_output(command, shell=True, text=True)
+                    check_output(command, shell=True, text=True, stderr=STDOUT)
                 else:
-                    check_output(command, shell=True)
+                    check_output(command, shell=True, stderr=STDOUT)
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
-                try:
-                    error = error.decode(chardet.detect(error)['encoding'])
-                except BaseException:
-                    error = error.decode('utf-8')
+                if error is None:
+                    error = "Unknown error (no output captured)"
+                elif isinstance(error, bytes):
+                    detected = chardet.detect(error)
+                    encoding = detected.get('encoding') if detected else None
+                    if encoding:
+                        try:
+                            error = error.decode(encoding)
+                        except (UnicodeDecodeError, LookupError):
+                            error = error.decode('utf-8', errors='replace')
+                    else:
+                        error = error.decode('utf-8', errors='replace')
 
         # remove credential from env variables
         if "TWINE_USERNAME" in environ:
