@@ -125,18 +125,15 @@ class PyPIUploader:
             except CalledProcessError as e:
                 publish_failed = True
                 error = e.output
-                if error is None:
+                if not error:
                     error = "Unknown error (no output captured)"
                 elif isinstance(error, bytes):
-                    detected = chardet.detect(error)
-                    encoding = detected.get('encoding') if detected else None
-                    if encoding:
-                        try:
-                            error = error.decode(encoding)
-                        except (UnicodeDecodeError, LookupError):
-                            error = error.decode('utf-8', errors='replace')
-                    else:
-                        error = error.decode('utf-8', errors='replace')
+                    fallback = 'utf-8'
+                    try:
+                        encoding = (chardet.detect(error) or {}).get('encoding') or fallback
+                        error = error.decode(encoding)
+                    except (UnicodeDecodeError, LookupError):
+                        error = error.decode(fallback, errors='replace')
 
         # remove credential from env variables
         if "TWINE_USERNAME" in environ:
