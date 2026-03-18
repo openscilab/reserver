@@ -144,7 +144,8 @@ class PyPIUploader:
         remove_dir(package_path)
 
         if publish_failed:
-            print(f"Publish to PyPI failed because of: ", error)
+            safe_error = error.encode('ascii', errors='replace').decode('ascii')
+            print(f"Publish to PyPI failed because of: {safe_error}")
             return False
         else:
             print("Congratulations! You have successfully reserved the PyPI package: ", package_name)
