@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
+- `_run` function in `__main__.py`
+- `_parse_args` function in `__main__.py`
 - CLI messages updated
 - CLI modified
 - `README.md` updated
