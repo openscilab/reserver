@@ -71,9 +71,9 @@ Reserver is an open source Python package that offers the ability to quickly
 ### PyPI
 
 - Check [Python Packaging User Guide](https://packaging.python.org/installing/)
-- Run `pip install reserver==0.6`
+- Run `pip install reserver==0.7`
 ### Source code
-- Download [Version 0.6](https://github.com/openscilab/reserver/archive/v0.6.zip) or [Latest Source](https://github.com/openscilab/reserver/archive/dev.zip)
+- Download [Version 0.7](https://github.com/openscilab/reserver/archive/v0.7.zip) or [Latest Source](https://github.com/openscilab/reserver/archive/dev.zip)
 - Run `pip install .`
 
 ## Usage

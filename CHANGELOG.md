@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.7] - 2026-04-06
 ### Changed
 - `_run` function in `__main__.py`
 - `_parse_args` function in `__main__.py`
@@ -83,7 +85,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Handle similar name existence in PyPI
 - Handle issue with "-" character `.egginfo` file name
 
-[Unreleased]: https://github.com/openscilab/reserver/compare/v0.6...dev
+[Unreleased]: https://github.com/openscilab/reserver/compare/v0.7...dev
+[0.7]: https://github.com/openscilab/reserver/compare/v0.6...v0.7
 [0.6]: https://github.com/openscilab/reserver/compare/v0.5...v0.6
 [0.5]: https://github.com/openscilab/reserver/compare/v0.4...v0.5
 [0.4]: https://github.com/openscilab/reserver/compare/v0.3...v0.4
