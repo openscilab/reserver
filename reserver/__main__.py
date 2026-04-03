@@ -35,15 +35,17 @@ def _parse_args():
     parser.add_argument('--version', help="version", action='store_true', default=False)
     parser.add_argument('-v', help="version", action='store_true', default=False)
     args = parser.parse_known_args()[0]
-    return args
+    return args, parser
 
 
-def _run(args):
+def _run(args, parser):
     """
     Run reserver CLI.
 
     :param args: arguments
     :type args: argparse.Namespace
+    :param parser: argument parser
+    :type parser: argparse.ArgumentParser
     """
     if args.version or args.v:
         print(RESERVER_VERSION)
@@ -68,8 +70,8 @@ def main():
     :return: None
     """
     try:
-        args = _parse_args()
-        _run(args)
+        args, parser = _parse_args()
+        _run(args, parser)
     except (KeyboardInterrupt, EOFError):
         print(EXIT_MESSAGE)
 
