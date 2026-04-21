@@ -30,6 +30,8 @@ class PyPIUploader:
         :type test_pypi: bool
         :return: an instance of the Reserver PyPIUploader
         """
+        if not isinstance(api_token, str) or not api_token.strip():
+            raise ReserverBaseError(MISSING_API_TOKEN_ERROR)
         self.username = "__token__"
         self.password = api_token
         self.test_pypi = test_pypi
