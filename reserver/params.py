@@ -5,13 +5,14 @@ Reserver is an open source Python package that offers the ability to quickly res
 """
 RESERVER_VERSION = "0.7"
 RESERVER_NAME = "reserver"
+RESERVER_REPO_URL = "https://github.com/openscilab/reserver"
 PACKAGE_PARAMETERS = {
     "description": "This name has been reserved using Reserver",
     "author": "Development Team",
-    "author_email": "test@test.com",
-    "url": "https://url.com",
-    "download_url": "https://download_url.com",
-    "source": "https://github.com/source",
+    "author_email": "reserver@openscilab.com",
+    "url": RESERVER_REPO_URL,
+    "download_url": RESERVER_REPO_URL,
+    "source": RESERVER_REPO_URL,
     "license": "MIT",
 }
 VALIDATIONS = {
