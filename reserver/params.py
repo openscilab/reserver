@@ -18,6 +18,7 @@ VALIDATIONS = {
     "email": r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
     "url": r'^(http|https)://[a-zA-Z0-9.-_]+\.[a-zA-Z]{2,}(/\S*)?$',
 }
+MISSING_API_TOKEN_ERROR = "A non-empty PyPI API token (str) is required."
 INVALID_PACKAGE_PARAMETER_NAME_ERROR = "Given parameter doesn't exist among the supported user allowed parameters."
 INVALID_PACKAGE_PARAMETER_VALUE_ERROR = "Invalid value for {parameter} that should be a valid {regex}"
 INVALID_CONFIG_FILE_NAME_ERROR = "Given file name for user-defined package params is not a string."
