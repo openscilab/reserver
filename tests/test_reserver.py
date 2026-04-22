@@ -66,6 +66,10 @@ def test_cwd_untouched(tmp_path, monkeypatch):
 
     monkeypatch.chdir(tmp_path)
 
+    # Snapshot the environment *before* the call. Reserver must leave it
+    # untouched (credentials are injected only into the subprocess env).
+    env_before = dict(os.environ)
+
     # Fake token is enough; we assert on cleanup, not on upload outcome details.
     uploader = PyPIUploader("pypi-fake-token-for-cwd-test", test_pypi=True)
     assert uploader.upload(target_name) == False
@@ -75,8 +79,7 @@ def test_cwd_untouched(tmp_path, monkeypatch):
     assert marker.exists()
     assert marker.read_text(encoding="utf-8") == marker_content
     assert [p.name for p in victim.iterdir()] == ["marker.txt"]
-    assert "TWINE_USERNAME" not in os.environ
-    assert "TWINE_PASSWORD" not in os.environ
+    assert dict(os.environ) == env_before
 
 
 @pytest.mark.end_to_end
