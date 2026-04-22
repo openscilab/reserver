@@ -94,9 +94,13 @@ class PyPIUploader:
         original_cwd = getcwd()
         workdir = mkdtemp(prefix="reserver-")
 
-        # Build a per-call env copy so credentials exist only in the subprocess
-        # environment, never in this process's os.environ. Thread-safe and leak-free.
-        upload_env = environ.copy()
+        # Build a per-call env for the subprocess:
+        #   * inherit everything non-TWINE from the parent (PATH, HOME, proxies, etc.)
+        #   * strip any pre-existing TWINE_* so parent-set vars like
+        #     TWINE_REPOSITORY_URL can't redirect reserver's upload
+        #   * inject reserver's own credentials
+        # os.environ itself is never mutated (thread-safe, leak-free).
+        upload_env = {k: v for k, v in environ.items() if not k.startswith("TWINE_")}
         upload_env["TWINE_USERNAME"] = self.username
         upload_env["TWINE_PASSWORD"] = self.password
 
