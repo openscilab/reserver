@@ -5,7 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+### Changed
+- `generate_template_setup_py` function in `reserver/functions.py`
+- `generate_template_pyproject_toml` function in `reserver/functions.py`
+- `params.py`
+- `__init__` method in `PyPIUploader`
+- `upload` method in `PyPIUploader`
+- Test system modified
 ## [0.7] - 2026-04-03
 ### Changed
 - `_run` function in `__main__.py`

@@ -3,11 +3,12 @@
 import chardet
 import platform
 from sys import executable
-from os import environ, path, getcwd
+from os import environ, path, getcwd, chdir
+from tempfile import mkdtemp
 from .errors import ReserverBaseError
 from .functions import generate_template_setup_py
 from subprocess import check_output, CalledProcessError, STDOUT
-from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR
+from .params import UNEQUAL_PARAM_NAME_LENGTH_ERROR, MISSING_API_TOKEN_ERROR
 from .params import MAIN_PYPI_REVOKE_TOKEN_MESSAGE, TEST_PYPI_REVOKE_TOKEN_MESSAGE
 from .utils import has_named_parameter, remove_dir, read_json
 
@@ -30,6 +31,8 @@ class PyPIUploader:
         :type test_pypi: bool
         :return: an instance of the Reserver PyPIUploader
         """
+        if not isinstance(api_token, str) or not api_token.strip():
+            raise ReserverBaseError(MISSING_API_TOKEN_ERROR)
         self.username = "__token__"
         self.password = api_token
         self.test_pypi = test_pypi
@@ -86,62 +89,73 @@ class PyPIUploader:
         if not isinstance(user_parameters, dict) and user_parameters is not None:
             user_parameters = read_json(user_parameters)
 
-        environ["TWINE_USERNAME"] = self.username
-        environ["TWINE_PASSWORD"] = self.password
-
-        package_path = path.join(getcwd(), package_name)
-        generated_dist_folder = path.join(package_path, "dist")
-        generated_tar_gz_file = path.join(generated_dist_folder, "*.tar.gz")
-        generated_wheel_file = path.join(generated_dist_folder, "*.whl")
-        # prevent from uploading any other previously build library in this path.
-        remove_dir(generated_dist_folder)
-        build_command = f'"{executable}" -m build "{package_path}" --sdist --wheel'
-        if platform.system() == "Windows":
-            commands = [f'{build_command} > nul 2>&1']
-        else:
-            commands = [f'{build_command} > /dev/null 2>&1']
-        if self.test_pypi:
-            commands += [
-                f'"{executable}" -m twine upload --repository testpypi "{generated_tar_gz_file}"',
-                f'"{executable}" -m twine upload --repository testpypi "{generated_wheel_file}"',
-            ]
-        else:
-            commands += [
-                f'"{executable}" -m twine upload "{generated_tar_gz_file}"',
-                f'"{executable}" -m twine upload "{generated_wheel_file}"',
-            ]
-        # Run the commands
         publish_failed = False
         error = None
+        original_cwd = getcwd()
+        workdir = mkdtemp(prefix="reserver-")
 
-        generate_template_setup_py(package_name, user_parameters)
+        # Build a per-call env for the subprocess:
+        #   * inherit everything non-TWINE from the parent (PATH, HOME, proxies, etc.)
+        #   * strip any pre-existing TWINE_* so parent-set vars like
+        #     TWINE_REPOSITORY_URL can't redirect reserver's upload
+        #   * inject reserver's own credentials
+        # os.environ itself is never mutated (thread-safe, leak-free).
+        upload_env = {k: v for k, v in environ.items() if not k.startswith("TWINE_")}
+        upload_env["TWINE_USERNAME"] = self.username
+        upload_env["TWINE_PASSWORD"] = self.password
 
-        for command in commands:
-            try:
-                if has_named_parameter(check_output, "text"):
-                    check_output(command, shell=True, text=True, stderr=STDOUT)
-                else:
-                    check_output(command, shell=True, stderr=STDOUT)
-            except CalledProcessError as e:
-                publish_failed = True
-                error = e.output
-                if not error:
-                    error = "Unknown error (no output captured)"
-                elif isinstance(error, bytes):
-                    fallback = 'utf-8'
-                    try:
-                        encoding = (chardet.detect(error) or {}).get('encoding') or fallback
-                        error = error.decode(encoding)
-                    except (UnicodeDecodeError, LookupError):
-                        error = error.decode(fallback, errors='replace')
+        try:
+            # build the template package inside an isolated temp dir to avoid
+            # touching (or deleting) any same-named directory in the user's CWD
+            chdir(workdir)
 
-        # remove credential from env variables
-        if "TWINE_USERNAME" in environ:
-            environ.pop("TWINE_USERNAME")
-        if "TWINE_PASSWORD" in environ:
-            environ.pop("TWINE_PASSWORD")
-        # remove previously generated files
-        remove_dir(package_path)
+            package_path = path.join(workdir, package_name)
+            generated_dist_folder = path.join(package_path, "dist")
+            generated_tar_gz_file = path.join(generated_dist_folder, "*.tar.gz")
+            generated_wheel_file = path.join(generated_dist_folder, "*.whl")
+            build_command = f'"{executable}" -m build "{package_path}" --sdist --wheel'
+            if platform.system() == "Windows":
+                commands = [f'{build_command} > nul 2>&1']
+            else:
+                commands = [f'{build_command} > /dev/null 2>&1']
+            if self.test_pypi:
+                commands += [
+                    f'"{executable}" -m twine upload --repository testpypi "{generated_tar_gz_file}"',
+                    f'"{executable}" -m twine upload --repository testpypi "{generated_wheel_file}"',
+                ]
+            else:
+                commands += [
+                    f'"{executable}" -m twine upload "{generated_tar_gz_file}"',
+                    f'"{executable}" -m twine upload "{generated_wheel_file}"',
+                ]
+
+            generate_template_setup_py(package_name, user_parameters)
+
+            for command in commands:
+                try:
+                    if has_named_parameter(check_output, "text"):
+                        check_output(command, shell=True, text=True, stderr=STDOUT, env=upload_env)
+                    else:
+                        check_output(command, shell=True, stderr=STDOUT, env=upload_env)
+                except CalledProcessError as e:
+                    publish_failed = True
+                    error = e.output
+                    if not error:
+                        error = "Unknown error (no output captured)"
+                    elif isinstance(error, bytes):
+                        fallback = 'utf-8'
+                        try:
+                            encoding = (chardet.detect(error) or {}).get('encoding') or fallback
+                            error = error.decode(encoding)
+                        except (UnicodeDecodeError, LookupError):
+                            error = error.decode(fallback, errors='replace')
+                    # stop on the first failure so we report the actual cause
+                    # instead of overwriting `error` with follow-up twine failures
+                    break
+        finally:
+            # always restore CWD and clean the temp dir
+            chdir(original_cwd)
+            remove_dir(workdir)
 
         if publish_failed:
             safe_error = error.encode('ascii', errors='replace').decode('ascii')
