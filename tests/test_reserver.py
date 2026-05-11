@@ -4,16 +4,24 @@ import pytest
 from reserver import PyPIUploader, ReserverBaseError
 from reserver.functions import get_random_name
 
-pypi_token = os.environ.get("TWINE_PASSWORD")
+# Dependabot (and fork) PRs do not receive Actions secrets; skip actual reservation tests
+# that need a real Test PyPI token. Same tests still run on push / in-repo PRs.
+requires_test_pypi_token = pytest.mark.skipif(
+    not (os.environ.get("TWINE_TEST_PASSWORD") or "").strip(),
+    reason="TWINE_TEST_PASSWORD not set (e.g. Dependabot PR)",
+)
+
 test_pypi_token = os.environ.get("TWINE_TEST_PASSWORD")
 
 
+@requires_test_pypi_token
 def test_taken_name():
     # Reserving a name that already exists on (test) PyPI must fail.
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
     assert uploader.upload("numpy") == False
 
 
+@requires_test_pypi_token
 def test_stdlib_name():
     # Reserving a Python standard-library module name must fail.
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
@@ -27,12 +35,14 @@ def test_wrong_token():
 
 
 @pytest.mark.end_to_end
+@requires_test_pypi_token
 def test_upload_success():
     # Happy path: free name + correct token -> successful reservation.
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
     assert uploader.upload(get_random_name()) == True
 
 
+@requires_test_pypi_token
 def test_module_conflict():
     # Name collides with the importable module of a *different* existing
     # package (e.g. project "X" ships module "freeze"). PyPI blocks this.
@@ -40,6 +50,7 @@ def test_module_conflict():
     assert uploader.upload("freeze") == False
 
 
+@requires_test_pypi_token
 def test_batch_all_taken():
     # Batch of already-taken names -> zero successful reservations.
     uploader = PyPIUploader(test_pypi_token, test_pypi=True)
@@ -83,6 +94,7 @@ def test_cwd_untouched(tmp_path, monkeypatch):
 
 
 @pytest.mark.end_to_end
+@requires_test_pypi_token
 def test_batch_success():
     # Batch happy path: two free names with per-package custom params.
     # Invoker must be in the repo root so that "tests/" is resolvable.
