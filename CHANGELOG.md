@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Test system modified
 ## [0.7] - 2026-04-06
 ### Changed
+- `generate_template_setup_py` function in `reserver/functions.py`
+- `generate_template_pyproject_toml` function in `reserver/functions.py`
+- `params.py`
+- `__init__` method in `PyPIUploader`
+- `upload` method in `PyPIUploader`
+- Test system modified
+## [0.7] - 2026-04-03
+### Changed
 - `_run` function in `__main__.py`
 - `_parse_args` function in `__main__.py`
 - CLI messages updated
@@ -90,6 +98,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Generate template package for a given name
 - Handle similar name existence in PyPI
 - Handle issue with "-" character `.egginfo` file name
+
 
 [Unreleased]: https://github.com/openscilab/reserver/compare/v0.8...dev
 [0.8]: https://github.com/openscilab/reserver/compare/v0.7...v0.8
