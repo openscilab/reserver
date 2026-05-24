@@ -99,7 +99,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Handle similar name existence in PyPI
 - Handle issue with "-" character `.egginfo` file name
 
-
 [Unreleased]: https://github.com/openscilab/reserver/compare/v0.8...dev
 [0.8]: https://github.com/openscilab/reserver/compare/v0.7...v0.8
 [0.7]: https://github.com/openscilab/reserver/compare/v0.6...v0.7
