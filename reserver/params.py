@@ -3,7 +3,7 @@
 OVERVIEW = """
 Reserver is an open source Python package that offers the ability to quickly reserve a PyPI package name. Got a notion? Before it's taken, immediately reserve the product name!
 """
-RESERVER_VERSION = "0.7"
+RESERVER_VERSION = "0.8"
 RESERVER_NAME = "reserver"
 RESERVER_REPO_URL = "https://github.com/openscilab/reserver"
 PACKAGE_PARAMETERS = {
