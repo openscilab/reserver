@@ -29,14 +29,14 @@ def read_description():
 setup(
     name='reserver',
     packages=['reserver',],
-    version='0.7',
+    version='0.8',
     description='PyPI package name reserver',
     long_description=read_description(),
     long_description_content_type='text/markdown',
     author='Reserver Development Team',
     author_email='reserver@openscilab.com',
     url='https://github.com/openscilab/reserver',
-    download_url='https://github.com/openscilab/reserver/tarball/v0.7',
+    download_url='https://github.com/openscilab/reserver/tarball/v0.8',
     keywords="pypi pip package name reserve reserver reservation python",
     project_urls={
             'Source': 'https://github.com/openscilab/reserver',
