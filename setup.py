@@ -1,16 +1,7 @@
 # -*- coding: utf-8 -*-
 """Setup module."""
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
 
-
-def get_requires():
-    """Read requirements.txt."""
-    requirements = open("requirements.txt", "r").read()
-    return list(filter(lambda x: x != "", requirements.split()))
-
+from setuptools import setup
 
 def read_description():
     """Read README.md and CHANGELOG.md."""
@@ -37,11 +28,18 @@ setup(
     author_email='reserver@openscilab.com',
     url='https://github.com/openscilab/reserver',
     download_url='https://github.com/openscilab/reserver/tarball/v0.8',
-    keywords="pypi pip package name reserve reserver reservation python",
+    keywords='pypi pip package name reserve reserver reservation python',
     project_urls={
-            'Source': 'https://github.com/openscilab/reserver',
+        'Source': 'https://github.com/openscilab/reserver',
     },
-    install_requires=get_requires(),
+    install_requires=[
+        'art>=5.3',
+        'setuptools>=40.8.0',
+        'wheel>=0.35.0',
+        'twine>=3.5.0',
+        'chardet>=4.0.0',
+        'build>=0.9.0'
+    ],
     python_requires='>=3.7',
     classifiers=[
         'Development Status :: 3 - Alpha',
