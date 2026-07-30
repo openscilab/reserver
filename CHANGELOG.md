@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - CodeQL (SAST) scan
 - Dependency Review (SCA) scan
+### Changed
+- Dependencies structure modified
 ## [0.8] - 2026-05-27
 ### Changed
 - `upload` method in `uploader.py`

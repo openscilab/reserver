@@ -48,10 +48,9 @@ jobs:
         run: |
           python -m reserver --token "${{ secrets.TEST_PYPI_PASSWORD }}" --test --name numpy
           reserver --token "${{ secrets.TEST_PYPI_PASSWORD }}" --test --name numpy
-      - name: Test requirements Installation
+      - name: Dev requirements Installation
         run: |
-          python otherfiles/requirements-splitter.py
-          pip install --upgrade --upgrade-strategy=only-if-needed -r test-requirements.txt
+          pip install --upgrade --upgrade-strategy=only-if-needed -r requirements-dev.txt
       - name: Test with pytest 
         env:
           TWINE_TEST_USERNAME: ${{ secrets.TEST_PYPI_USERNAME }}
