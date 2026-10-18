@@ -1,6 +1,6 @@
 art==6.5
 wheel==0.48.0
 setuptools==84.0.0
-twine==6.2.0
+twine==7.0.0
 build==1.4.3
 chardet==5.2.0
